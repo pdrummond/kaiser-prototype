@@ -18,9 +18,9 @@ class BacklogLine extends Line {
       <div className="Line BacklogLine">
         <p className="title">{title}</p>
         <div className="columns">
-          {this.props.line.columnIds.map( (columnId) => {
+          {this.props.line.columnIds.map( (columnId, index) => {
             const column = State.findColumn(columnId);
-            return (<Column key={column.id} column={column}/>);
+            return (<Column key={column.id} column={column} columnIndex={index} />);
           })}
         </div>
       </div>

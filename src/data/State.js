@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import reactUpdate from 'react-addons-update';
+import update from 'react-addons-update';
 
 let defaultState = {
   boards: [{
@@ -11,43 +11,66 @@ let defaultState = {
     id: 'line1',
     title: "Backlog",
     type: 'backlog',
-    columnIds: ['column1'],
+    columnIds: ['column1', 'column2'],
   }],
   columns: [{
     id: 'column1',
     title: "Incoming",
-    cardIds:['card1', 'card2']
-  }],
-  cards: [
-    {
+    cards:[{
       id: 'card1',
       title: "Card One"
-    },
-    {
+    },{
       id: 'card2',
       title: "Card Two"
     }]
+  },{
+    id: 'column2',
+    title: "Triage",
+    cards:[{
+      id: 'card3',
+      title: "Card Three"
+    },{
+      id: 'card4',
+      title: "Card Four"
+    },{
+      id: 'card5',
+      title: "Card Five"
+    }]
+  }]
 };
 
-function reducer(state = defaultState, action) {
-  console.log(">> reducer for " + action.type);
-  console.log("-- reducer state", state);
-  console.log("-- reducer action", action);
-  console.log("<< reducer for " + action.type);
-  switch(action.type) {
-    case 'SET_CARD_TITLE':
-      return reactUpdate(state, {
-        cards: {
-          0: {
-            title: {$set: "Boom"}
-          }
-        }
-      });
-    default:
-      console.error("No reducer for " + action.type);
-      return state;
-  }
 
+function reducer(state = defaultState, action) {
+  //console.log(">> reducer for " + action.type);
+  //console.log("-- reducer state", state);
+  //console.log("-- reducer action", action);
+  //console.log("<< reducer for " + action.type);
+  switch(action.type) {
+    //This is just a test for the 'boom' button - will be removed soon!
+    case 'SET_CARD_TITLE': {
+      return update(state, {
+        columns: {0: {
+          cards: {0: {
+            title: {$set: "Boom"}
+          }}
+        }}
+      });
+    }
+    case 'REORDER_CARD': {
+      const dragCard = state.columns[action.columnIndex].cards[action.dragIndex];
+      return update(state, {
+        columns: {[action.columnIndex]: {
+        cards: { $splice: [
+            [action.dragIndex, 1],
+            [action.hoverIndex, 0, dragCard]
+          ]}
+        }}
+      });
+    }
+    default: {
+      return state;
+    }
+  }
 }
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

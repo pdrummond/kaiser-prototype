@@ -6,7 +6,6 @@ import * as State from '../../data/State';
 
 class Board extends Component {
   render() {
-    console.log("Board props", this.props);
     return (
       <div className="Board">
         <h1>{this.props.board.title}</h1>

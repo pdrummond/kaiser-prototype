@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BoardPage from './pages/BoardPage';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
+
 
 class App extends Component {
 
   render() {
-    console.log("App render() props:", this.props);
     return (
       <div className="App">
         <BoardPage boards={this.props.state.boards}/>
@@ -15,16 +17,16 @@ class App extends Component {
   }
 
   handleClick() {
-    this.props.dispatch({type: 'SET_CARD_TITLE', title:'BOOM'});    
+    this.props.dispatch({type: 'SET_CARD_TITLE', title:'BOOM'});
   }
 }
 
 
 const mapStateToProps = (state) => {
-  console.log("mapStateToProps", state);
   return {
     state
   }
 }
 
-export default App = connect(mapStateToProps)(App)
+App = connect(mapStateToProps)(App)
+export default DragDropContext(HTML5Backend)(App);

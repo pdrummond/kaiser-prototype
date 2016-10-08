@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Card from '../card/Card';
 import './Column.css';
-import * as State from '../../data/State';
 
 class Column extends Component {
   render() {
 
     const {
+      columnIndex,
       column: {
         title
       }
@@ -16,9 +16,8 @@ class Column extends Component {
       <div className="Column">
         <div className="title">{title}</div>
         <div className="cards">
-          {this.props.column.cardIds.map( (cardId) => {
-            const card = State.findCard(cardId);
-            return (<Card key={card.id} card={card}/>);
+          {this.props.column.cards.map( (card, index) => {
+            return (<Card key={card.id} index={index} card={card} columnIndex={columnIndex}/>);
           })}
         </div>
       </div>

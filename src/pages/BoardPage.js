@@ -4,7 +4,6 @@ import './BoardPage.css'
 
 class BoardPage extends Component {
   render() {
-    console.log("BoardPage props: ", this.props);
     //For now just pick out the first board.
     const board = this.props.boards[0];
     return (
