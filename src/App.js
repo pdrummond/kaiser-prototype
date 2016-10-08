@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import BoardPage from './pages/BoardPage';
 
 class App extends Component {
+
   render() {
+    console.log("App render() props:", this.props);
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <BoardPage boards={this.props.state.boards}/>
+        <button onClick={this.handleClick.bind(this)}>BOOM</button>
       </div>
     );
   }
+
+  handleClick() {
+    this.props.dispatch({type: 'SET_CARD_TITLE', title:'BOOM'});    
+  }
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  console.log("mapStateToProps", state);
+  return {
+    state
+  }
+}
+
+export default App = connect(mapStateToProps)(App)

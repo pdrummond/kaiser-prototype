@@ -1,0 +1,12 @@
+.Card {
+  width:180px;
+  height:30px;
+  background:white;
+  border-radius:5px;
+  box-shadow: 0px 0px 2px 1px lightgray;
+  margin: 5px 10px 10px 10px;
+}
+
+.Card .title {
+  padding:5px;
+}

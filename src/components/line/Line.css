@@ -1,0 +1,13 @@
+.Line {
+  width:100%;
+  height:300px;
+}
+
+.Line > .title {
+  padding:5px;
+}
+
+.Line .columns {
+  display:flex;
+  height:250px;
+}
