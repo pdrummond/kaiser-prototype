@@ -12,6 +12,7 @@
   text-transform:uppercase;
   color:#adadad;
   font-size:14px;
+  transition: all 0.1s ease-in-out;
 }
 
 .Column .cards {

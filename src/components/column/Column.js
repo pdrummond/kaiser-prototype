@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../../data/ItemTypes';
+import * as State from '../../data/State';
 import Card from '../card/Card';
 import './Column.css';
 
 const columnTarget = {
-  drop() {
+  drop(props, monitor) {
+    const card = monitor.getItem();
+    console.log("BOOM", props, monitor.getItem());
+    State.getReduxStore().dispatch({
+      type: 'MOVE_CARD',
+      cardId:card.id,
+      cardIndex:card.index,
+      toColumnIndex:props.columnIndex,
+      fromColumnIndex:card.columnIndex
+    });
+  },
+
+  canDrop(props, monitor, component) {
+    return props.columnIndex !== monitor.getItem().columnIndex;
   }
 };
 
@@ -18,15 +32,21 @@ class Column extends Component {
         title
       }
     } = this.props;
-    const isActive = /*canDrop &&*/ isOver;
-    console.log("BOOM:", this.props);
+    const isActive = canDrop && isOver;
 
-    return (
-      <div className="Column" style={{backgroundColor:(isActive?'red':'whitesmoke')}}>
+    return connectDropTarget(
+      <div className="Column" style={{backgroundColor:(isActive?'#e4e4e4':'whitesmoke')}}>
         <div className="title">{title}</div>
         <div className="cards">
           {this.props.column.cards.map( (card, index) => {
-            return (<Card key={card.id} index={index} card={card} columnIndex={columnIndex}/>);
+            return (
+              <Card
+                columnIsActive={isActive}
+                key={card.id}
+                index={index}
+                card={card}
+                columnIndex={columnIndex}/>
+              );
           })}
         </div>
       </div>
@@ -34,12 +54,13 @@ class Column extends Component {
   }
 }
 
-function collectDropTarget(connect, monitor) {
+function collectDropTarget(connectDragSource, monitor) {
   //console.log("BOOMX: ", monitor.getItem());
   return {
-    connectDropTarget: connect.dropTarget(),
+    connectDropTarget: connectDragSource.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    canDrop: monitor.canDrop(),
+    item: monitor.getItem()
   };
 }
 

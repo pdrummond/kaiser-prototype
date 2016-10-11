@@ -7,8 +7,8 @@ import './Card.css'
 
 class Card extends Component {
   render() {
-    //console.log("Card render:", this.props);
     const {
+      columnIsActive,
       connectDragSource,
       connectDropTarget,
       isDragging,
@@ -16,7 +16,7 @@ class Card extends Component {
         title
       }
     } = this.props;
-    const opacity = isDragging ? 0 : 1;
+    const opacity = isDragging ? 0 : (columnIsActive?0.4:1);
 
     return connectDragSource(connectDropTarget(
       <div className="Card" style={{opacity}}>
@@ -33,7 +33,7 @@ class Card extends Component {
 const cardSource = {
   beginDrag(props) {
     return {
-      id: props.id,
+      id: props.card.id,
       index: props.index,
       columnIndex: props.columnIndex
     };
@@ -87,9 +87,10 @@ const cardTarget = {
   }
 };
 
-function collectDropTarget(connect) {
+function collectDropTarget(connect, monitor) {
   return {
-    connectDropTarget:connect.dropTarget()
+    connectDropTarget:connect.dropTarget(),
+    isOver: monitor.isOver()
   };
 }
 

@@ -1,3 +1,4 @@
 export default {
-  CARD: 'CARD'
+  CARD: 'CARD',
+  COLUMN: 'COLUMN'
 };

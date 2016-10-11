@@ -11,7 +11,7 @@ let defaultState = {
     id: 'line1',
     title: "Backlog",
     type: 'backlog',
-    columnIds: ['column1', 'column2'],
+    columnIds: ['column1', 'column2', 'column3'],
   }],
   columns: [{
     id: 'column1',
@@ -36,6 +36,10 @@ let defaultState = {
       id: 'card5',
       title: "Card Five"
     }]
+  },{
+    id: 'column3',
+    title: "Accepted",
+    cards:[]
   }]
 };
 
@@ -67,6 +71,22 @@ function reducer(state = defaultState, action) {
         }}
       });
     }
+    case 'MOVE_CARD': {
+      let dragCard = findCard(state.columns[action.fromColumnIndex], action.cardId);
+      let newState = update(state, {
+        columns: {[action.fromColumnIndex]: {
+          cards: { $splice: [[action.cardIndex, 1]]}
+        }}
+      });
+      newState = update(newState, {
+        columns: {[action.toColumnIndex]: {
+          cards: { $push: [dragCard]}
+        }}
+      });
+      //state.columns[action.columnIndex]
+      console.log("newState:", newState);
+      return newState;
+    }
     default: {
       return state;
     }
@@ -89,7 +109,6 @@ export function findColumn(columnId) {
   return state.columns.find( (column) => (column.id === columnId));
 }
 
-export function findCard(cardId) {
-  const state = store.getState();
-  return state.cards.find( (card) => (card.id === cardId));
+export function findCard(column, cardId) {
+  return column.cards.find( (card) => (card.id === cardId));
 }
