@@ -47,7 +47,10 @@ function reducer(state = defaultState, action) {
   //console.log("<< reducer for " + action.type);
   switch(action.type) {
     case 'SET_STATE': {
-        return action.state;
+      return action.state;
+    }
+    case 'NEW_BOARD': {
+      return defaultState;
     }
     case 'SET_CARD_TITLE': {
       const columnIndex = findColumnIndex(action.columnId);

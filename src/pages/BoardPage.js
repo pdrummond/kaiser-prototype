@@ -18,7 +18,7 @@ class BoardPage extends Component {
         <div className="buttonMenu">
           <span style={{fontSize:'20px', fontWeight:'bold'}}>{board.title}</span>
           <button onClick={this.newCard.bind(this)}>New Card</button>
-          <button>New Board</button>
+          <button onClick={this.newBoard.bind(this)}>New Board</button>
           <button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>
@@ -86,6 +86,10 @@ class BoardPage extends Component {
 
   newCard() {
     State.getReduxStore().dispatch({type: 'NEW_CARD'});
+  }
+
+  newBoard() {
+    State.getReduxStore().dispatch({type: 'NEW_BOARD'});
   }
 }
 
