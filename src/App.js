@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BoardPage boards={this.props.state.boards}/>        
+        <BoardPage boards={this.props.state.boards} lines={this.props.state.lines}/>        
       </div>
     );
   }

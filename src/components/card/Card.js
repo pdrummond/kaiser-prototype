@@ -31,7 +31,7 @@ class Card extends Component {
           </div>
           :
           <div className="title" onDoubleClick={() => this.setCardEditMode(true)}>
-            {title} <span style={{color:'lightgray'}}>(id:{id}, idx:{index})</span>
+            {title} <div style={{color:'lightgray'}}>(id:{id}, idx:{index})</div>
           </div>
         }
       </div>

@@ -1,6 +1,7 @@
 import { compose, createStore } from 'redux';
 import persistState from 'redux-localstorage';
 import update from 'react-addons-update';
+import slug from 'slug';
 
 const boardTitle = (window.location.pathname.startsWith("/") ? window.location.pathname : 'default')
 console.log("BOOM: " + boardTitle);
@@ -55,6 +56,43 @@ function reducer(state = defaultState, action) {
     }
     case 'NEW_BOARD': {
       return defaultState;
+    }
+    case 'NEW_COMPONENT': {
+      const id = slug(action.title);
+      let newState = update(state, {
+
+      });
+      newState = update(newState, {
+        lines: { $push: [{
+          id,
+          title: action.title,
+          type: 'component',
+          columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`],
+        }]}
+      });
+      return update(newState, {
+        columns: { $push: [{
+          id: `${id}/todo`,
+          title: "Todo",
+          cards:[]
+        },{
+          id: `${id}/doing`,
+          title: "Doing",
+          cards:[]
+        },{
+          id: `${id}/paused`,
+          title: "Paused",
+          cards:[]
+        },{
+          id: `${id}/blocked`,
+          title: "Blocked",
+          cards:[]
+        },{
+          id: `${id}/review`,
+          title: "Review",
+          cards:[]
+        }]}
+      });
     }
     case 'SET_CARD_TITLE': {
       const columnIndex = findColumnIndex(action.columnId);
