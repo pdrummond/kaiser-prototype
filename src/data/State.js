@@ -2,13 +2,16 @@ import { compose, createStore } from 'redux';
 import persistState from 'redux-localstorage';
 import update from 'react-addons-update';
 
+const boardTitle = (window.location.pathname.startsWith("/") ? window.location.pathname : 'default')
+console.log("BOOM: " + boardTitle);
+
 let defaultState = {
   settings: {
     nextCardNumber:0
   },
   boards: [{
     id: 'board1',
-    title: "Board 1",
+    title: boardTitle.replace("/", ""),
     lineIds: ['backlog'],
   }],
   lines: [{
@@ -132,7 +135,7 @@ function reducer(state = defaultState, action) {
 
 const enhancer = compose(
   persistState(null, {
-    key: 'kaiser' + (window.location.pathname.startsWith("/") ? window.location.pathname : 'default')
+    key: 'kaiser' + boardTitle
   })
 );
 
