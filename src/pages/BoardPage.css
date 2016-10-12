@@ -1,3 +1,7 @@
 .Board {
   padding:10px;
 }
+
+.Board .buttonMenu button {
+  margin:5px;
+}

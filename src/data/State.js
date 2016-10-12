@@ -62,6 +62,9 @@ function reducer(state = defaultState, action) {
   //console.log("-- reducer action", action);
   //console.log("<< reducer for " + action.type);
   switch(action.type) {
+    case 'SET_STATE': {
+        return action.state;
+    }
     //This is just a test for the 'boom' button - will be removed soon!
     case 'SET_CARD_TITLE': {
       return update(state, {
@@ -92,6 +95,7 @@ function reducer(state = defaultState, action) {
           cards: { $splice: [[action.cardIndex, 1]]}
         }}
       });
+      console.log("MOVE CARD REMOVE:", newState.columns[fromColumnIndex].cards);
       const toColumnIndex = findColumnIndex(action.toColumnId);
       newState = update(newState, {
         columns: {[toColumnIndex]: {
