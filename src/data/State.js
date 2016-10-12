@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { compose, createStore } from 'redux';
+import persistState from 'redux-localstorage';
 import update from 'react-addons-update';
 
 let defaultState = {
@@ -129,7 +130,17 @@ function reducer(state = defaultState, action) {
   }
 }
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const enhancer = compose(
+  persistState(null, {
+    key: 'kaiser' + (window.location.pathname.startsWith("/") ? window.location.pathname : 'default')
+  })
+);
+
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  enhancer
+);
 
 export function getReduxStore() {
   return store;
