@@ -5,13 +5,18 @@ let defaultState = {
   boards: [{
     id: 'board1',
     title: "Board 1",
-    lineIds: ['line1'],
+    lineIds: ['line1', 'line2'],
   }],
   lines: [{
     id: 'line1',
     title: "Backlog",
     type: 'backlog',
     columnIds: ['column1', 'column2', 'column3'],
+  },{
+    id: 'line2',
+    title: "Component one",
+    type: 'backlog',
+    columnIds: ['column4'],
   }],
   columns: [{
     id: 'column1',
@@ -40,6 +45,13 @@ let defaultState = {
     id: 'column3',
     title: "Accepted",
     cards:[]
+  },{
+    id: 'column4',
+    title: "Todo",
+    cards:[{
+      id: 'card6',
+      title: "Card Six"
+    }]
   }]
 };
 
@@ -72,14 +84,17 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'MOVE_CARD': {
-      let dragCard = findCard(state.columns[action.fromColumnIndex], action.cardId);
+      console.log("MOVE_CARD action:", action);
+      const fromColumnIndex = findColumnIndex(action.fromColumnId);
+      let dragCard = findCard(state.columns[fromColumnIndex], action.cardId);
       let newState = update(state, {
-        columns: {[action.fromColumnIndex]: {
+        columns: {[fromColumnIndex]: {
           cards: { $splice: [[action.cardIndex, 1]]}
         }}
       });
+      const toColumnIndex = findColumnIndex(action.toColumnId);
       newState = update(newState, {
-        columns: {[action.toColumnIndex]: {
+        columns: {[toColumnIndex]: {
           cards: { $push: [dragCard]}
         }}
       });
@@ -107,6 +122,11 @@ export function findLine(lineId) {
 export function findColumn(columnId) {
   const state = store.getState();
   return state.columns.find( (column) => (column.id === columnId));
+}
+
+export function findColumnIndex(columnId) {
+  const state = store.getState();
+  return state.columns.findIndex( (column) => (column.id === columnId));
 }
 
 export function findCard(column, cardId) {

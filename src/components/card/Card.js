@@ -35,7 +35,8 @@ const cardSource = {
     return {
       id: props.card.id,
       index: props.index,
-      columnIndex: props.columnIndex
+      columnIndex: props.columnIndex,
+      columnId: props.columnId
     };
   }
 };

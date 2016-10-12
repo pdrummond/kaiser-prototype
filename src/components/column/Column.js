@@ -13,17 +13,18 @@ const columnTarget = {
       type: 'MOVE_CARD',
       cardId:card.id,
       cardIndex:card.index,
-      toColumnIndex:props.columnIndex,
-      fromColumnIndex:card.columnIndex
+      toColumnId:props.column.id,
+      fromColumnId:card.columnId
     });
   },
 
   canDrop(props, monitor, component) {
-    return props.columnIndex !== monitor.getItem().columnIndex;
+    return props.column.id !== monitor.getItem().columnId;
   }
 };
 
 class Column extends Component {
+
   render() {
     const {
       canDrop, isOver, connectDropTarget,
@@ -45,7 +46,8 @@ class Column extends Component {
                 key={card.id}
                 index={index}
                 card={card}
-                columnIndex={columnIndex}/>
+                columnIndex={columnIndex}
+                columnId={this.props.column.id}/>
               );
           })}
         </div>
