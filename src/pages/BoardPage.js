@@ -16,6 +16,8 @@ class BoardPage extends Component {
     return (
       <div className="Board">
         <div className="buttonMenu">
+          <span style={{fontSize:'20px', fontWeight:'bold'}}>{board.title}</span>
+          <button onClick={this.newCard.bind(this)}>New Card</button>
           <button>New Board</button>
           <button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
@@ -74,12 +76,16 @@ class BoardPage extends Component {
     function receivedText(e) {
       let lines = e.target.result;
       var state = JSON.parse(lines);
-      console.log("LOADED STATE: ", state);      
+      console.log("LOADED STATE: ", state);
       State.getReduxStore().dispatch({
         type: 'SET_STATE',
         state
       });
     }
+  }
+
+  newCard() {
+    State.getReduxStore().dispatch({type: 'NEW_CARD'});
   }
 }
 

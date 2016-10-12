@@ -9,4 +9,10 @@
 
 .Card .title {
   padding:5px;
+  font-size:12px;
+}
+
+.Card .title input {
+  outline:none;
+  border:none;
 }

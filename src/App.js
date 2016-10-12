@@ -10,8 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BoardPage boards={this.props.state.boards}/>
-        <button onClick={this.handleClick.bind(this)}>BOOM</button>
+        <BoardPage boards={this.props.state.boards}/>        
       </div>
     );
   }

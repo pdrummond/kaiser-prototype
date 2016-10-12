@@ -16,6 +16,6 @@
 }
 
 .Column .cards {
-  height:100%;
+  height:calc(100% - 25px);
   overflow-y:auto;
 }

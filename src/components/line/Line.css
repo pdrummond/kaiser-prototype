@@ -4,6 +4,8 @@
 
 .Line > .title {
   padding:5px;
+  margin:0px;
+  margin-bottom:5px;
 }
 
 .Line .columns {

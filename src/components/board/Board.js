@@ -8,7 +8,6 @@ class Board extends Component {
   render() {
     return (
       <div className="Board">
-        <h1>{this.props.board.title}</h1>
         {this.props.board.lineIds.map( (lineId) => {
           let line = State.findLine(lineId);
           switch(line.type) {

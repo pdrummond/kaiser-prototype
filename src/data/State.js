@@ -2,56 +2,40 @@ import { createStore } from 'redux';
 import update from 'react-addons-update';
 
 let defaultState = {
+  settings: {
+    nextCardNumber:0
+  },
   boards: [{
     id: 'board1',
     title: "Board 1",
-    lineIds: ['line1', 'line2'],
+    lineIds: ['backlog'],
   }],
   lines: [{
-    id: 'line1',
+    id: 'backlog',
     title: "Backlog",
     type: 'backlog',
-    columnIds: ['column1', 'column2', 'column3'],
-  },{
-    id: 'line2',
-    title: "Component one",
-    type: 'backlog',
-    columnIds: ['column4'],
+    columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
   }],
   columns: [{
-    id: 'column1',
+    id: 'backlog/incoming',
     title: "Incoming",
-    cards:[{
-      id: 'card1',
-      title: "Card One"
-    },{
-      id: 'card2',
-      title: "Card Two"
-    }]
+    cards:[]
   },{
-    id: 'column2',
+    id: 'backlog/triage',
     title: "Triage",
-    cards:[{
-      id: 'card3',
-      title: "Card Three"
-    },{
-      id: 'card4',
-      title: "Card Four"
-    },{
-      id: 'card5',
-      title: "Card Five"
-    }]
+    cards:[]
   },{
-    id: 'column3',
+    id: 'backlog/accepted',
     title: "Accepted",
     cards:[]
   },{
-    id: 'column4',
-    title: "Todo",
-    cards:[{
-      id: 'card6',
-      title: "Card Six"
-    }]
+    id: 'backlog/rejected',
+    title: "Rejected",
+    cards:[]
+  },{
+    id: 'backlog/out-of-scope',
+    title: "Out of Scope",
+    cards:[]
   }]
 };
 
@@ -65,13 +49,43 @@ function reducer(state = defaultState, action) {
     case 'SET_STATE': {
         return action.state;
     }
-    //This is just a test for the 'boom' button - will be removed soon!
     case 'SET_CARD_TITLE': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
       return update(state, {
-        columns: {0: {
-          cards: {0: {
-            title: {$set: "Boom"}
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            title: {$set: action.title},
+            editMode: {$set: action.editMode}
           }}
+        }}
+      });
+    }
+    case 'SET_CARD_EDIT_MODE': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            editMode: {$set: action.editMode}
+          }}
+        }}
+      });
+    }
+    case 'NEW_CARD': {
+      const columnIndex = findColumnIndex('backlog/incoming');
+      let newState = update(state, {
+        settings: {
+          nextCardNumber: {$set: state.settings.nextCardNumber+1}
+        }
+      });
+      return update(newState, {
+        columns: {[columnIndex]: {
+          cards: { $push: [{
+            id: newState.settings.nextCardNumber,
+            title: '',
+            editMode: true
+          }]}
         }}
       });
     }
@@ -135,4 +149,8 @@ export function findColumnIndex(columnId) {
 
 export function findCard(column, cardId) {
   return column.cards.find( (card) => (card.id === cardId));
+}
+
+export function findCardIndex(column, cardId) {
+  return column.cards.findIndex( (card) => (card.id === cardId));
 }

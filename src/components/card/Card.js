@@ -12,17 +12,41 @@ class Card extends Component {
       connectDragSource,
       connectDropTarget,
       isDragging,
+      index,
       card: {
-        title
+        id,
+        title,
+        editMode
       }
     } = this.props;
     const opacity = isDragging ? 0 : (columnIsActive?0.4:1);
 
     return connectDragSource(connectDropTarget(
       <div className="Card" style={{opacity}}>
-        <div className="title" onClick={this.handleClick.bind(this)}>{title}</div>
+        {
+          editMode
+          ?
+          <div className="title">
+            <input className="cardTitleInput" ref="titleInput" defaultValue={title} onKeyUp={(e) => { if(e.keyCode === 13) {this.setCardTitle()} else if(e.keyCode===27){this.setCardEditMode(false)}}} autoFocus={true} placeholder="Enter card title"/>
+          </div>
+          :
+          <div className="title" onDoubleClick={() => this.setCardEditMode(true)}>
+            {title} <span style={{color:'lightgray'}}>(id:{id}, idx:{index})</span>
+          </div>
+        }
       </div>
     ));
+  }
+
+  setCardTitle() {
+    const title = findDOMNode(this.refs.titleInput).value.trim();
+    if(title && title.length > 0) {
+      State.getReduxStore().dispatch({type: 'SET_CARD_TITLE', columnId:this.props.columnId, cardId:this.props.card.id, title, editMode:false});
+    }
+  }
+
+  setCardEditMode(editMode) {
+    State.getReduxStore().dispatch({type: 'SET_CARD_EDIT_MODE', columnId:this.props.columnId, cardId:this.props.card.id, editMode});
   }
 
   handleClick() {
