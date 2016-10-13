@@ -1,5 +1,6 @@
 .Column {
-  width:250px;
+  min-width:250px;
+  max-width:250px;
   height:100%;
   border-radius:10px;
   margin:0px 10px 0px 10px;
@@ -14,6 +15,6 @@
 }
 
 .Column .cards {
-  height:calc(100% - 25px);
+  height:calc(100% - 27px);
   overflow-y:auto;
 }

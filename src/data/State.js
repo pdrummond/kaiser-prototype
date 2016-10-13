@@ -11,7 +11,7 @@ console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardP
 
 let defaultState = {
   settings: {
-    nextCardNumber:3
+    currentCardNumber:1
   },
   boards: [{
     id: 'board1',
@@ -23,7 +23,7 @@ let defaultState = {
     title: "Backlog",
     type: 'backlog',
     expanded: true,
-    columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
+    columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope', 'backlog/trash'],
   },{
     id: 'test',
     title: "Test",
@@ -40,21 +40,11 @@ let defaultState = {
   columns: [{
     id: 'backlog/incoming',
     title: "Incoming",
-    cards:[{
-      id: 3,
-      title: 'Card Three'
-    }]
+    cards:[]
   },{
     id: 'backlog/triage',
     title: "Triage",
-    cards:[{
-      id: 1,
-      title: 'Card One',
-      assignee:'pdrummond'
-    },{
-      id: 2,
-      title: 'Card Two'
-    }]
+    cards:[]
   },{
     id: 'backlog/accepted',
     title: "Accepted",
@@ -66,6 +56,10 @@ let defaultState = {
   },{
     id: 'backlog/out-of-scope',
     title: "Out of Scope",
+    cards:[]
+  },{
+    id: 'backlog/trash',
+    title: "Trash",
     cards:[]
   },{
     id: 'test/ready',
@@ -173,13 +167,13 @@ function reducer(state = defaultState, action) {
       const columnIndex = findColumnIndex('backlog/incoming');
       let newState = update(state, {
         settings: {
-          nextCardNumber: {$set: state.settings.nextCardNumber+1}
+          currentCardNumber: {$set: state.settings.currentCardNumber+1}
         }
       });
       return update(newState, {
         columns: {[columnIndex]: {
           cards: { $push: [{
-            id: newState.settings.nextCardNumber,
+            id: newState.settings.currentCardNumber,
             title: '',
             editMode: true
           }]}

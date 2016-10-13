@@ -1,5 +1,4 @@
 .Line {
-  width:100%;
 }
 
 .Line > .title {
@@ -12,5 +11,5 @@
 
 .Line .columns {
   display:flex;
-  height:210px;
+  height:210px;  
 }
