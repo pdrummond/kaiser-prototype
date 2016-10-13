@@ -31,7 +31,9 @@ class Card extends Component {
           </div>
           :
           <div className="title" onDoubleClick={() => this.setCardEditMode(true)} style={{fontWeight:'bold'}}>
-            <span style={{color:'gray'}}>{id.toUpperCase()}:</span> {title} <span style={{color:'lightgray'}}>({index})</span>
+            <span style={{color:'gray'}}>{`#${id}`}:</span>
+            <span style={{fontSize:'14px'}}> {title}</span>
+            <span style={{color:'lightgray'}}> {index}</span>
           </div>
         }
       </div>

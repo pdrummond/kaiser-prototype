@@ -129,7 +129,7 @@ function reducer(state = defaultState, action) {
       return update(newState, {
         columns: {[columnIndex]: {
           cards: { $push: [{
-            id: boardKey + "/" + newState.settings.nextCardNumber,
+            id: newState.settings.nextCardNumber,
             title: '',
             editMode: true
           }]}
