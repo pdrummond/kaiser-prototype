@@ -19,7 +19,7 @@ class BoardPage extends Component {
           <span style={{fontSize:'20px', fontWeight:'bold'}}>{board.title}</span>
           <button onClick={this.newCard.bind(this)}>New Card</button>
           <button onClick={this.newComponent.bind(this)}>New Component</button>
-          <button onClick={this.newBoard.bind(this)}>New Board</button>
+          <button onClick={this.newBoard.bind(this)}>Clear Board</button>
           <button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>
