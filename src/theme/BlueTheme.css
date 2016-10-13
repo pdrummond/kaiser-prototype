@@ -1,0 +1,22 @@
+.Board {
+  background-color:#4575A1;
+}
+
+.Column {
+  background-color:#E2E4E6;
+  box-shadow: 2px 2px 10px 1px #214A6E;
+}
+
+.Column.active {
+  background-color: #8F43A5;
+}
+
+.Column > .title {
+  font-weight:bold;
+  color: black;
+}
+
+.Card {
+  background-color: white;
+  box-shadow: 2px 2px 3px 1px lightgray;
+}

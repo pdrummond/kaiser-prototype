@@ -8,7 +8,6 @@ import './Column.css';
 const columnTarget = {
   drop(props, monitor) {
     const card = monitor.getItem();
-    console.log("BOOM", props, monitor.getItem());
     State.getReduxStore().dispatch({
       type: 'MOVE_CARD',
       cardId:card.id,
@@ -36,7 +35,7 @@ class Column extends Component {
     const isActive = canDrop && isOver;
 
     return connectDropTarget(
-      <div className="Column" style={{backgroundColor:(isActive?'#e4e4e4':'whitesmoke')}}>
+      <div className={"Column" + (isActive ? ' active':'')}>
         <div className="title">{title}</div>
         <div className="cards">
           {this.props.column.cards.map( (card, index) => {

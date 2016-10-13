@@ -1,9 +1,7 @@
 .Column {
-  width:200px;
+  width:250px;
   height:100%;
-  background:whitesmoke;
   border-radius:10px;
-  box-shadow: 0px 0px 2px 1px lightgray;
   margin:0px 10px 0px 10px;
 }
 
