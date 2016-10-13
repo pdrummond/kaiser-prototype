@@ -14,7 +14,7 @@ class BoardPage extends Component {
     //For now just pick out the first board.
     const board = this.props.boards[0];
     return (
-      <div className="Board">
+      <div className="BoardPage">
         <div className="buttonMenu">
           <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>
           <button onClick={this.newCard.bind(this)}>New Card</button>

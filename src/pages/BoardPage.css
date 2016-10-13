@@ -1,7 +1,9 @@
-.Board {
+.BoardPage {
   padding:10px;
+  height:100%;
+  overflow:hidden;
 }
 
-.Board .buttonMenu button {
+.BoardPage .buttonMenu button {
   margin:5px;
 }

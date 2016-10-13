@@ -2,3 +2,7 @@
   height: calc(100% - 60px);
   overflow:scroll;
 }
+
+.Board .lines {
+  padding-bottom:50px;
+}

@@ -24,6 +24,18 @@ let defaultState = {
     type: 'backlog',
     expanded: true,
     columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
+  },{
+    id: 'test',
+    title: "Test",
+    type: 'test',
+    expanded: false,
+    columnIds: ['test/ready', 'test/testing', 'test/paused'],
+  },{
+    id: 'done',
+    title: "Done",
+    type: 'done',
+    expanded: false,
+    columnIds: ['done/ready', 'done/release1-0', 'done/release1-1', 'done/release2-0'],
   }],
   columns: [{
     id: 'backlog/incoming',
@@ -55,6 +67,34 @@ let defaultState = {
     id: 'backlog/out-of-scope',
     title: "Out of Scope",
     cards:[]
+  },{
+    id: 'test/ready',
+    title: "Test Ready",
+    cards:[]
+  },{
+    id: 'test/testing',
+    title: "Testing",
+    cards:[]
+  },{
+    id: 'test/paused',
+    title: "Paused",
+    cards:[]
+  },{
+    id: 'done/ready',
+    title: "Release Ready",
+    cards:[]
+  },{
+    id: 'done/release1-0',
+    title: "Release 1.0",
+    cards:[]
+  },{
+    id: 'done/release1-1',
+    title: "Release 1.1",
+    cards:[]
+  },{
+    id: 'done/release2-0',
+    title: "Release 2.0",
+    cards:[]
   }]
 };
 
@@ -74,13 +114,13 @@ function reducer(state = defaultState, action) {
     case 'NEW_COMPONENT': {
       const id = slug(action.title);
       let newState = update(state, {
-        lines: { $push: [{
+        lines: { $splice: [[1,0, {
           id,
           title: action.title,
           type: 'component',
           expanded:true,
           columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`],
-        }]}
+        }]]}
       });
       return update(newState, {
         columns: { $push: [{
