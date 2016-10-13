@@ -22,8 +22,7 @@
 }
 
 .Card {
-  background-color: white;
-  box-shadow: 2px 2px 3px 1px lightgray;
+  background-color: white;  
 }
 
 .Card > .title {

@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 import * as State from '../../data/State';
 import ItemTypes from '../../data/ItemTypes';
 import './Card.css'
 
 class Card extends Component {
+
+  componentDidMount() {
+     // Use empty image as a drag preview so browsers don't draw it
+     // and we can draw whatever we want on the custom drag layer instead.
+     this.props.connectDragPreview(getEmptyImage(), {
+       // IE fallback: specify that we'd rather screenshot the node
+       // when it already knows it's being dragged so we can hide it with CSS.
+       captureDraggingState: false
+     });
+   }
+
   render() {
     const {
       columnIsActive,
@@ -68,6 +80,7 @@ const cardSource = {
   beginDrag(props) {
     return {
       id: props.card.id,
+      title:props.card.title,
       index: props.index,
       columnIndex: props.columnIndex,
       columnId: props.columnId
@@ -76,7 +89,7 @@ const cardSource = {
 };
 
 const cardTarget = {
-  hover(props, monitor, component) {    
+  hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index;
     const columnIndex = monitor.getItem().columnIndex;
     const hoverIndex = props.index;
@@ -134,6 +147,7 @@ function collectDropTarget(connect, monitor) {
 function collectDragSource(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }

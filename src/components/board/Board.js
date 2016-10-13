@@ -4,12 +4,14 @@ import ComponentLine from '../component-line/ComponentLine';
 import TestLine from '../test-line/TestLine';
 import DoneLine from '../done-line/DoneLine';
 import ScratchLine from '../scratch-line/ScratchLine';
+import CustomDragLayer from './CustomDragLayer';
 import './Board.css';
 
 class Board extends Component {
   render() {
     return (
       <div className="Board">
+        <CustomDragLayer/>
         <div className="lines">
         {this.props.lines.map( (line) => {
           switch(line.type) {
