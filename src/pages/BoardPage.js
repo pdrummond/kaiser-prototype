@@ -19,7 +19,7 @@ class BoardPage extends Component {
           <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>
           <button onClick={this.newCard.bind(this)}>New Card</button>
           <button onClick={this.newComponent.bind(this)}>New Component</button>
-          <button onClick={this.newBoard.bind(this)}>Clear Board</button>
+          <button onClick={this.clearBoard.bind(this)}>Clear Board</button>
           {/*<button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
@@ -89,8 +89,10 @@ class BoardPage extends Component {
     State.getReduxStore().dispatch({type: 'NEW_CARD'});
   }
 
-  newBoard() {
-    State.getReduxStore().dispatch({type: 'NEW_BOARD'});
+  clearBoard() {
+    if(confirm("Are you sure?")) {
+      State.getReduxStore().dispatch({type: 'NEW_BOARD'});
+    }
   }
 
   newComponent() {
