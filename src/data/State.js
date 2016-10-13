@@ -3,8 +3,10 @@ import persistState from 'redux-localstorage';
 import update from 'react-addons-update';
 import slug from 'slug';
 
-const boardTitle = (window.location.pathname.startsWith("/") ? window.location.pathname : 'default')
-console.log("BOOM: " + boardTitle);
+const boardPathName = (window.location.pathname.startsWith("/") ? window.location.pathname : '/default');
+const boardTitle = boardPathName.replace("/", "");
+const boardKey = slug(boardTitle);
+console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardPathName + ")");
 
 let defaultState = {
   settings: {
@@ -12,7 +14,7 @@ let defaultState = {
   },
   boards: [{
     id: 'board1',
-    title: boardTitle.replace("/", ""),
+    title: boardTitle,
     lineIds: ['backlog'],
   }],
   lines: [{
@@ -127,7 +129,7 @@ function reducer(state = defaultState, action) {
       return update(newState, {
         columns: {[columnIndex]: {
           cards: { $push: [{
-            id: newState.settings.nextCardNumber,
+            id: boardKey + "/" + newState.settings.nextCardNumber,
             title: '',
             editMode: true
           }]}
@@ -173,7 +175,7 @@ function reducer(state = defaultState, action) {
 
 const enhancer = compose(
   persistState(null, {
-    key: 'kaiser' + boardTitle
+    key: 'kaiser' + boardPathName
   })
 );
 

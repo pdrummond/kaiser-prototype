@@ -30,8 +30,8 @@ class Card extends Component {
             <input className="cardTitleInput" ref="titleInput" defaultValue={title} onKeyUp={(e) => { if(e.keyCode === 13) {this.setCardTitle()} else if(e.keyCode===27){this.setCardEditMode(false)}}} autoFocus={true} placeholder="Enter card title"/>
           </div>
           :
-          <div className="title" onDoubleClick={() => this.setCardEditMode(true)}>
-            {title} <div style={{color:'lightgray'}}>(id:{id}, idx:{index})</div>
+          <div className="title" onDoubleClick={() => this.setCardEditMode(true)} style={{fontWeight:'bold'}}>
+            <span style={{color:'gray'}}>{id.toUpperCase()}:</span> {title} <span style={{color:'lightgray'}}>({index})</span>
           </div>
         }
       </div>
