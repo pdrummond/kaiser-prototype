@@ -4,25 +4,22 @@ import Column from '../column/Column';
 import './Line.css';
 
 class Line extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showColumns:true
-    }
-  }
 
   render() {
 
     const {
       line: {
-        title
+        title,
+        expanded
       }
     } = this.props;
 
     return (
       <div className="Line">
-        <p className="title" onClick={()=>{this.setState({showColumns:!this.state.showColumns})}}>{title}</p>
-        <div className="columns" style={{display:(this.state.showColumns?'flex':'none')}}>
+        <p className="title" onClick={this.handleTitleClicked.bind(this)}>
+          <i className={"fa " + (expanded?"fa-caret-down":"fa-caret-right")} style={{width:'12px'}}></i> {title}
+        </p>
+        <div className="columns" style={{display:(expanded?'flex':'none')}}>
           {this.props.line.columnIds.map( (columnId, index) => {
             const column = State.findColumn(columnId);
             return (<Column key={column.id} column={column} columnIndex={index} />);
@@ -30,6 +27,10 @@ class Line extends Component {
         </div>
       </div>
     );
+  }
+
+  handleTitleClicked() {
+    State.getReduxStore().dispatch({type: 'TOGGLE_LINE_EXPANDED', lineId: this.props.line.id});
   }
 }
 

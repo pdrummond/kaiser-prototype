@@ -16,7 +16,7 @@ class BoardPage extends Component {
     return (
       <div className="Board">
         <div className="buttonMenu">
-          <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'3px', marginRight:'20px'}}>{board.title}</span>
+          <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>
           <button onClick={this.newCard.bind(this)}>New Card</button>
           <button onClick={this.newComponent.bind(this)}>New Component</button>
           <button onClick={this.newBoard.bind(this)}>Clear Board</button>

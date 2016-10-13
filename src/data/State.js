@@ -3,7 +3,8 @@ import persistState from 'redux-localstorage';
 import update from 'react-addons-update';
 import slug from 'slug';
 
-const boardPathName = (window.location.pathname.startsWith("/") ? window.location.pathname : '/default');
+const pathname = window.location.pathname;
+const boardPathName = (pathname.startsWith("/") && pathname.length > 1 ? window.location.pathname : '/default');
 const boardTitle = boardPathName.replace("/", "");
 const boardKey = slug(boardTitle);
 console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardPathName + ")");
@@ -21,6 +22,7 @@ let defaultState = {
     id: 'backlog',
     title: "Backlog",
     type: 'backlog',
+    expanded: true,
     columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
   }],
   columns: [{
@@ -72,13 +74,11 @@ function reducer(state = defaultState, action) {
     case 'NEW_COMPONENT': {
       const id = slug(action.title);
       let newState = update(state, {
-
-      });
-      newState = update(newState, {
         lines: { $push: [{
           id,
           title: action.title,
           type: 'component',
+          expanded:true,
           columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`],
         }]}
       });
@@ -175,6 +175,14 @@ function reducer(state = defaultState, action) {
       console.log("newState:", newState);
       return newState;
     }
+    case 'TOGGLE_LINE_EXPANDED': {
+      const lineIndex = findLineIndex(action.lineId);
+      return update(state, {
+        lines: {[lineIndex]: {
+          expanded: {$set: !state.lines[lineIndex].expanded}
+        }}
+      });
+    }
     default: {
       return state;
     }
@@ -200,6 +208,11 @@ export function getReduxStore() {
 export function findLine(lineId) {
   const state = store.getState();
   return state.lines.find( (line) => (line.id === lineId));
+}
+
+export function findLineIndex(lineId) {
+  const state = store.getState();
+  return state.lines.findIndex( (line) => (line.id === lineId));
 }
 
 export function findColumn(columnId) {
