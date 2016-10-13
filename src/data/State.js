@@ -35,7 +35,8 @@ let defaultState = {
     title: "Triage",
     cards:[{
       id: 1,
-      title: 'Card One'
+      title: 'Card One',
+      assignee:'pdrummond'
     },{
       id: 2,
       title: 'Card Two'

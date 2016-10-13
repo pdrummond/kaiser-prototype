@@ -36,7 +36,7 @@ class Column extends Component {
 
     return connectDropTarget(
       <div className={"Column" + (isActive ? ' active':'')}>
-        <div className="title">{title}</div>
+        <div className="title">{title} <span style={{color:'gray', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
         <div className="cards">
           {this.props.column.cards.map( (card, index) => {
             return (

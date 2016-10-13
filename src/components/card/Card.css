@@ -13,4 +13,14 @@
 .Card .title input {
   outline:none;
   border:none;
+  padding:0px;
+  margin:0px;
+  font-size:14px;
+  color:#4d4d4d;
+}
+
+.Card .card-assignee-image {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
 }

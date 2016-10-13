@@ -25,6 +25,24 @@
   color: #4d4d4d;
 }
 
+.Card .card-task-icon {
+  color: #03A9F4;
+}
+
+.Card .badge {
+  background-color:#fbfbfb;
+  border-radius:3px;
+  padding:0px 3px 0px 3px;
+  margin-left:5px;
+  color:gray;
+  border:1px solid lightgray;
+}
+
+.Card .badge i {
+  position:relative;
+  top:1px;
+}
+
 .Line > .title {
   color:#bacee0;
 }

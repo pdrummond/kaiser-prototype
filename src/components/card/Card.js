@@ -12,11 +12,11 @@ class Card extends Component {
       connectDragSource,
       connectDropTarget,
       isDragging,
-      index,
       card: {
         id,
         title,
-        editMode
+        editMode,
+        assignee
       }
     } = this.props;
     const opacity = isDragging ? 0 : (columnIsActive?0.4:1);
@@ -31,11 +31,19 @@ class Card extends Component {
           </div>
           :
           <div className="title" onDoubleClick={() => this.setCardEditMode(true)}>
-            <span style={{fontSize:'14px'}}>{title}</span>
+            <span style={{fontSize:'14px'}}><i className="card-task-icon fa fa-exclamation-circle"></i> {title}</span>
             {/*<span style={{color:'lightgray'}}> {index}</span>*/}
           </div>
         }
-        <div style={{paddingLeft:'5px', fontSize:'12px', color:'gray'}}>{`#${id}`}</div>
+        <div style={{paddingLeft:'5px', fontSize:'12px', color:'gray', position:'relative', top:'4px'}}>
+          {`#${id}`}
+          <span className="badge"><i className="card-todo-icon fa fa-check-square-o"></i> 0/10</span>
+          <span className="badge"><i className="card-bug-icon fa fa-bug"></i> 0/10</span>
+        </div>
+        {assignee === 'pdrummond' &&
+        <div style={{position:'absolute', bottom:'0px', right:'5px'}}>
+          <img className="card-assignee-image" src="/images/pdrummond.png" alt="Assigned to pdrummond"/>
+        </div>}
       </div>
     ));
   }

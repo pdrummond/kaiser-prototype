@@ -16,13 +16,13 @@ class BoardPage extends Component {
     return (
       <div className="Board">
         <div className="buttonMenu">
-          <span style={{fontSize:'20px', fontWeight:'bold'}}>{board.title}</span>
+          <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'3px', marginRight:'20px'}}>{board.title}</span>
           <button onClick={this.newCard.bind(this)}>New Card</button>
           <button onClick={this.newComponent.bind(this)}>New Component</button>
           <button onClick={this.newBoard.bind(this)}>Clear Board</button>
-          <button onClick={this.saveBoard.bind(this)}>Save Board</button>
+          {/*<button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
-          <input ref="fileInput" type='file'/>
+          <input ref="fileInput" type='file'/>*/}
         </div>
         <Board board={board} lines={this.props.lines}/>
       </div>
