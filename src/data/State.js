@@ -147,7 +147,6 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'REORDER_CARD': {
-      console.log("REORDER_CARD");
       const dragCard = state.columns[action.columnIndex].cards[action.dragIndex];
       return update(state, {
         columns: {[action.columnIndex]: {
@@ -159,7 +158,6 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'MOVE_CARD': {
-      console.log("MOVE_CARD action:", action);
       const fromColumnIndex = findColumnIndex(action.fromColumnId);
       let dragCard = findCard(state.columns[fromColumnIndex], action.cardId);
       let newState = update(state, {
@@ -167,9 +165,6 @@ function reducer(state = defaultState, action) {
           cards: { $splice: [[action.cardIndex, 1]]}
         }}
       });
-      if(findColumn(action.fromColumnId))
-      console.log("MOVE CARD REMOVE:", newState.columns[fromColumnIndex].cards);
-
       const toColumnIndex = findColumnIndex(action.toColumnId);
       newState = update(newState, {
         columns: {[toColumnIndex]: {

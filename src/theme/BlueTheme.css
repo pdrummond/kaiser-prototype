@@ -8,8 +8,13 @@
 }
 
 .Column.active {
-  background-color: #6294C0;
+  background-color: #F99560;
 }
+
+.Column.active .title {
+  color:white;
+}
+
 
 .Column > .title {
   font-weight:bold;

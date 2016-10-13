@@ -1,15 +1,16 @@
 .Card {
   width:calc(100% - 20px);
-  height:50px;
+  min-height:50px;
   border-radius:5px;
   margin: 5px 10px 10px 10px;
+  padding-bottom:10px;
 }
 
 .Card .title {
   padding:5px;
+  padding-left:10px;
   font-size:12px;
 }
-
 .Card .title input {
   outline:none;
   border:none;
@@ -17,6 +18,7 @@
   margin:0px;
   font-size:14px;
   color:#4d4d4d;
+  width:100%;
 }
 
 .Card .card-assignee-image {

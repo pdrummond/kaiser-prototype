@@ -31,11 +31,11 @@ class Card extends Component {
           </div>
           :
           <div className="title" onDoubleClick={() => this.setCardEditMode(true)}>
-            <span style={{fontSize:'14px'}}><i className="card-task-icon fa fa-exclamation-circle"></i> {title}</span>
+            <span style={{fontSize:'14px'}}> <i className="card-task-icon fa fa-exclamation-circle"></i> {title}</span>
             {/*<span style={{color:'lightgray'}}> {index}</span>*/}
           </div>
         }
-        <div style={{paddingLeft:'5px', fontSize:'12px', color:'gray', position:'relative', top:'4px'}}>
+        <div style={{paddingLeft:'10px', fontSize:'12px', color:'gray', position:'relative', top:'4px'}}>
           {`#${id}`}
           <span className="badge"><i className="card-todo-icon fa fa-check-square-o"></i> 0/10</span>
           <span className="badge"><i className="card-bug-icon fa fa-bug"></i> 0/10</span>
@@ -76,8 +76,7 @@ const cardSource = {
 };
 
 const cardTarget = {
-  hover(props, monitor, component) {
-    console.log("hover props:", props);
+  hover(props, monitor, component) {    
     const dragIndex = monitor.getItem().index;
     const columnIndex = monitor.getItem().columnIndex;
     const hoverIndex = props.index;
