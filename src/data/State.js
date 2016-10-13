@@ -158,6 +158,22 @@ function reducer(state = defaultState, action) {
         }]}
       });
     }
+    case 'SET_LINE_TITLE': {
+      const lineIndex = findLineIndex(action.lineId);
+      return update(state, {
+        lines: {[lineIndex]: {
+          title: {$set: action.title}
+        }}
+      });
+    }
+    case 'TOGGLE_LINE_MAXIMISED': {
+      const lineIndex = findLineIndex(action.lineId);
+      return update(state, {
+        lines: {[lineIndex]: {
+          maximised: {$set: !state.lines[lineIndex].maximised}
+        }}
+      });
+    }
     case 'SET_CARD_TITLE': {
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);

@@ -11,5 +11,5 @@
 
 .Line .columns {
   display:flex;
-  height:210px;  
+  height: calc(100% - 60px);
 }
