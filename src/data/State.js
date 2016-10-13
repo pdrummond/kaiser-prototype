@@ -10,7 +10,7 @@ console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardP
 
 let defaultState = {
   settings: {
-    nextCardNumber:0
+    nextCardNumber:3
   },
   boards: [{
     id: 'board1',
@@ -26,11 +26,20 @@ let defaultState = {
   columns: [{
     id: 'backlog/incoming',
     title: "Incoming",
-    cards:[]
+    cards:[{
+      id: 3,
+      title: 'Card Three'
+    }]
   },{
     id: 'backlog/triage',
     title: "Triage",
-    cards:[]
+    cards:[{
+      id: 1,
+      title: 'Card One'
+    },{
+      id: 2,
+      title: 'Card Two'
+    }]
   },{
     id: 'backlog/accepted',
     title: "Accepted",
@@ -137,6 +146,7 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'REORDER_CARD': {
+      console.log("REORDER_CARD");
       const dragCard = state.columns[action.columnIndex].cards[action.dragIndex];
       return update(state, {
         columns: {[action.columnIndex]: {
@@ -156,7 +166,9 @@ function reducer(state = defaultState, action) {
           cards: { $splice: [[action.cardIndex, 1]]}
         }}
       });
+      if(findColumn(action.fromColumnId))
       console.log("MOVE CARD REMOVE:", newState.columns[fromColumnIndex].cards);
+
       const toColumnIndex = findColumnIndex(action.toColumnId);
       newState = update(newState, {
         columns: {[toColumnIndex]: {
