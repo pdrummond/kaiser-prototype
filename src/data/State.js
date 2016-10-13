@@ -23,7 +23,7 @@ let defaultState = {
     title: "Backlog",
     type: 'backlog',
     expanded: true,
-    columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope', 'backlog/trash'],
+    columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
   },{
     id: 'test',
     title: "Test",
@@ -36,6 +36,12 @@ let defaultState = {
     type: 'done',
     expanded: false,
     columnIds: ['done/ready', 'done/release1-0', 'done/release1-1', 'done/release2-0'],
+  },{
+    id: 'scratch',
+    title: "Scratch",
+    type: 'scratch',
+    expanded: false,
+    columnIds: ['scratch/requests', 'scratch/ideas', 'scratch/notes', 'scratch/trash'],
   }],
   columns: [{
     id: 'backlog/incoming',
@@ -56,10 +62,6 @@ let defaultState = {
   },{
     id: 'backlog/out-of-scope',
     title: "Out of Scope",
-    cards:[]
-  },{
-    id: 'backlog/trash',
-    title: "Trash",
     cards:[]
   },{
     id: 'test/ready',
@@ -88,6 +90,22 @@ let defaultState = {
   },{
     id: 'done/release2-0',
     title: "Release 2.0",
+    cards:[]
+  },{
+    id: 'scratch/requests',
+    title: "Requests",
+    cards:[]
+  },{
+    id: 'scratch/ideas',
+    title: "Ideas",
+    cards:[]
+  },{
+    id: 'scratch/notes',
+    title: "Notes",
+    cards:[]
+  },{
+    id: 'scratch/trash',
+    title: "Trash",
     cards:[]
   }]
 };
