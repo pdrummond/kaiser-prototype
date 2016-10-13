@@ -4,6 +4,7 @@ import BoardPage from './pages/BoardPage';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
+import './App.css';
 import './theme/BlueTheme.css';
 
 class App extends Component {

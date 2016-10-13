@@ -1,4 +1,4 @@
-.Board {
+.App, .Board {
   background-color:#4575A1;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .Column.active {
-  background-color: #8F43A5;
+  background-color: #6294C0;
 }
 
 .Column > .title {
@@ -19,4 +19,27 @@
 .Card {
   background-color: white;
   box-shadow: 2px 2px 3px 1px lightgray;
+}
+
+.Line > .title {
+  color:#bacee0;
+}
+
+button {
+  background-color:#214A6E;
+  border:1px solid #32608A;
+  color: #87B4DD;
+  padding:5px;
+  border-radius:5px;
+  outline:none;
+}
+
+button:hover {
+  background-color:#32608A;
+}
+
+button:active {
+  background-color:#87B4DD;
+  color: #214A6E;
+  border:1px solid #87B4DD;
 }
