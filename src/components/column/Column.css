@@ -18,3 +18,40 @@
   height:calc(100% - 27px);
   overflow-y:auto;
 }
+
+.Column .newCardLink {
+  color:#4575a1;
+  padding:5px;
+  text-decoration: none;
+  font-size:14px;
+  margin-left:5px;
+}
+
+.Column .newCardLink:hover {
+  color:white;
+  text-decoration: underline;
+}
+
+.Column .newCardInput {
+  background:white;
+  border:none;
+  padding:10px;
+  margin-left:10px;
+  outline:none;
+  width:calc(100% - 40px);
+  border-radius:5px;
+  font-size:14px;
+}
+
+.Column .newCardInput::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}
+.Column .newCardInput::-moz-placeholder { /* Firefox 19+ */
+  color: pink;
+}
+.Column .newCardInput:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+}
+.Column .newCardInput:-moz-placeholder { /* Firefox 18- */
+  color: pink;
+}

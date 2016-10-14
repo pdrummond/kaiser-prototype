@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
 import ItemTypes from '../../data/ItemTypes';
 import * as State from '../../data/State';
@@ -29,7 +30,8 @@ class Column extends Component {
       canDrop, isOver, connectDropTarget,
       columnIndex,
       column: {
-        title
+        title,
+        showNewCardInput
       }
     } = this.props;
     const isActive = canDrop && isOver;
@@ -50,9 +52,22 @@ class Column extends Component {
                 columnId={this.props.column.id}/>
               );
           })}
+          {!showNewCardInput && <a href="" className="newCardLink" onClick={this.handleNewCardLinkClicked.bind(this)}>New Card...</a>}
+          {showNewCardInput && <input ref="newCardInput" className="newCardInput" placeholder="" onKeyUp={(e) => { if(e.keyCode === 13) {this.handleCardInputEnterPressed()}}} autoFocus={true}/>}
         </div>
+
       </div>
     );
+  }
+
+  handleNewCardLinkClicked(e) {
+    e.preventDefault();
+    State.getReduxStore().dispatch({type: 'SET_COLUMN_SHOW_NEW_CARD_INPUT', columnId:this.props.column.id});
+  }
+
+  handleCardInputEnterPressed() {
+    const title = findDOMNode(this.refs.newCardInput).value.trim();
+    State.getReduxStore().dispatch({type: 'NEW_CARD', columnId:this.props.column.id, title});
   }
 }
 

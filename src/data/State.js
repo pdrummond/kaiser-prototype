@@ -351,20 +351,33 @@ function reducer(state = defaultState, action) {
         return state;
       }
     }
+    case 'SET_COLUMN_SHOW_NEW_CARD_INPUT': {
+      const columnIndex = findColumnIndex(action.columnId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          showNewCardInput: {$set: true}
+        }}
+      });
+    }
     case 'NEW_CARD': {
-      const columnIndex = findColumnIndex('backlog/incoming');
+      const columnIndex = findColumnIndex(action.columnId);
       let newState = update(state, {
         settings: {
           currentCardNumber: {$set: state.settings.currentCardNumber+1}
         }
       });
+      newState = update(newState, {
+        columns: {[columnIndex]: {
+          showNewCardInput: {$set: false}
+        }}
+      });
       return update(newState, {
         columns: {[columnIndex]: {
           cards: { $push: [{
             id: newState.settings.currentCardNumber,
-            title: 'Card '  + newState.settings.currentCardNumber,
+            title: action.title,
             type:'task',
-            editMode: true,
+            editMode: false,
             todos: [],
             bugs: [],
             comments: [],

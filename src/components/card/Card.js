@@ -25,7 +25,6 @@ class Card extends Component {
       connectDropTarget,
       isDragging,
       card: {
-        id,
         title,
         editMode,
         todos,
@@ -50,7 +49,6 @@ class Card extends Component {
           </div>
         }
         <div style={{paddingLeft:'10px', fontSize:'12px', color:'gray', position:'relative', top:'4px'}}>
-          {`#${id}`}
           {this.renderTodosBadge(todos)}
           {this.renderBugsBadge(bugs)}
           {this.renderCommentsBadge(comments)}
@@ -64,7 +62,9 @@ class Card extends Component {
     const cardTypeIcon = CardIcon.getCardTypeIcon(this.props.card.type);
     const cardTypeIconClassName = CardIcon.getCardTypeIconClassName(this.props.card.type);
     return (
-      <span style={{fontSize:'14px'}}> <i className={ cardTypeIconClassName + " fa " + cardTypeIcon}></i> {this.props.card.title}</span>
+      <span style={{fontSize:'14px'}}>
+        <i className={ cardTypeIconClassName + " fa " + cardTypeIcon}></i> <span className="inner-title">{this.props.card.title}</span> <span style={{color:'#c5c5c5'}}>{`#${this.props.card.id}`}</span>
+      </span>
     )
   }
 
