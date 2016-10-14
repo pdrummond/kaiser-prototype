@@ -26,6 +26,7 @@ class CardPage extends Component {
         <div className="rightSidebar">
           <h3>Actions</h3>
             <button className="actionButton" onClick={this.handleChangeCardTitle.bind(this)}><i className="fa fa-pencil"/> Change Title</button>
+            <button className="actionButton" onClick={this.handleSetAssignee.bind(this)}><i className="fa fa-user"/> Set Assignee</button>
             <button className="actionButton"><i className="fa fa-times"/> Delete Card</button>
           <h3>Card Type</h3>
           <select ref="cardTypeSelect" className="actionSelect" value={this.card.type} placeholder="Card Type" onChange={this.handleCardTypeChanged.bind(this)}>
@@ -62,6 +63,13 @@ class CardPage extends Component {
     const cardType = findDOMNode(this.refs.cardTypeSelect).value;
     if(cardType) {
       State.getReduxStore().dispatch({type: 'SET_CARD_TYPE', columnId:this.props.columnId, cardId:this.props.cardId, cardType});
+    }
+  }
+
+  handleSetAssignee() {
+    const assignee = prompt("Enter username:");
+    if(assignee && assignee.length > 0) {
+      State.getReduxStore().dispatch({type: 'ADD_CARD_ASSIGNEE', columnId:this.props.columnId, cardId:this.props.cardId, assignee: assignee.trim()});
     }
   }
 }

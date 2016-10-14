@@ -109,7 +109,8 @@ let defaultState = {
       type:'bug',
       todos:[],
       bugs:[],
-      comments:[]
+      comments:[],
+      assignees:[]
     }]
   },{
     id: 'backlog/accepted',
@@ -299,6 +300,29 @@ function reducer(state = defaultState, action) {
         }}
       });
     }
+    case 'ADD_CARD_ASSIGNEE': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      let assigneeData;
+      if(action.assignee === 'pdrummond') {
+        assigneeData = {
+          username: 'pdrummond',
+          imageUrl: '/images/pdrummond.png'
+        }
+      } else if(action.assignee === 'john') {
+        assigneeData = {
+          username: 'john',
+          imageUrl: '/images/john_swan.png'
+        }
+      }
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            assignees: { $push: [assigneeData]}
+          }}
+        }}
+      });
+    }
     case 'NEW_CARD': {
       const columnIndex = findColumnIndex('backlog/incoming');
       let newState = update(state, {
@@ -312,7 +336,11 @@ function reducer(state = defaultState, action) {
             id: newState.settings.currentCardNumber,
             title: 'Card '  + newState.settings.currentCardNumber,
             type:'task',
-            editMode: true
+            editMode: true,
+            todos: [],
+            bugs: [],
+            comments: [],
+            assignees:[]
           }]}
         }}
       });
