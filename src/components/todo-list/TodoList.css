@@ -1,0 +1,18 @@
+.TodoList {
+  border:1px solid lightgray;
+  width:50%;
+  padding:10px;
+}
+
+.TodoList .todos {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.TodoList .addTodoInput {
+  width:calc(100% - 30px);
+  background:whitesmoke;
+  border:1px solid lightgray;
+  outline:none;
+  padding:10px;
+}

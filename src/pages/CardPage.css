@@ -10,6 +10,10 @@
   box-shadow: 2px 2px 10px 1px #214A6E;
 }
 
+.CardPage > .contentArea {
+  padding-right:240px;
+}
+
 .CardPage > .rightSidebar {
   position:absolute;
   width:200px;

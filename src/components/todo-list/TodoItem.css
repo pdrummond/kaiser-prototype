@@ -1,0 +1,7 @@
+.TodoItem {
+  padding:5px;  
+}
+
+.TodoItem:hover {
+  background-color:whitesmoke;
+}

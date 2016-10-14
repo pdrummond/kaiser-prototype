@@ -2,6 +2,7 @@ import { compose, createStore } from 'redux';
 import persistState from 'redux-localstorage';
 import update from 'react-addons-update';
 import slug from 'slug';
+import uuid from 'uuid';
 
 const pathname = window.location.pathname;
 const boardPathName = (pathname.startsWith("/") && pathname.length > 1 ? window.location.pathname : '/default');
@@ -16,7 +17,7 @@ let defaultState = {
     },
   },
   settings: {
-    currentCardNumber:5,
+    currentCardNumber:2,
     currentCommentNumber:1
   },
   boards: [{
@@ -69,16 +70,16 @@ let defaultState = {
       title: 'This is a task with todos,bugs and comments',
       type:'task',
       todos:[{
-        id:2,
+        id:uuid.v1(),
         title:'Todo 1',
         done:true
       },{
-        id:3,
+        id:uuid.v1(),
         title:'Todo 2',
         done:false
       }],
       bugs:[{
-        id:4,
+        id:uuid.v1(),
         title:'Bug 1',
         done:false
       }],
@@ -99,7 +100,7 @@ let defaultState = {
         imageUrl: '/images/john_swan.png'
       }]
     }, {
-      id:5,
+      id:2,
       title: 'This is a bug',
       type:'bug',
       todos:[],
@@ -387,6 +388,50 @@ function reducer(state = defaultState, action) {
         }
       });
     }
+    case 'ADD_TODO': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      console.log("ADD_TODO", columnIndex, cardIndex);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            todos: { $push: [{
+              id: uuid.v1(),
+              title: action.title
+            }]}
+          }}
+        }}
+      });
+    }
+    case 'TOGGLE_TODO_DONE': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      const card = findCard(state.columns[columnIndex], action.cardId);
+      const todoIndex = findTodoIndex(card, action.todoId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            todos: { [todoIndex]: {
+              done: {$set: action.done}
+            }}
+          }}
+        }}
+      });
+    }
+    case 'DELETE_TODO': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      const card = findCard(state.columns[columnIndex], action.cardId);
+      const todoIndex = findTodoIndex(card, action.todoId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            todos: { $splice: [[todoIndex, 1]]}
+          }}
+        }}
+      });
+    }
+
     default: {
       return state;
     }
@@ -435,4 +480,12 @@ export function findCard(column, cardId) {
 
 export function findCardIndex(column, cardId) {
   return column.cards.findIndex( (card) => (card.id === cardId));
+}
+
+export function findTodo(card, todoId) {
+  return card.todos.find( (todo) => (todo.id === todoId));
+}
+
+export function findTodoIndex(card, todoId) {
+  return card.todos.findIndex( (todo) => (todo.id === todoId));
 }
