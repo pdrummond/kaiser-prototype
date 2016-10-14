@@ -11,7 +11,7 @@ console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardP
 
 let defaultState = {
   settings: {
-    currentCardNumber:1
+    currentCardNumber:0
   },
   boards: [{
     id: 'board1',
@@ -166,14 +166,6 @@ function reducer(state = defaultState, action) {
         }}
       });
     }
-    case 'TOGGLE_LINE_MAXIMISED': {
-      const lineIndex = findLineIndex(action.lineId);
-      return update(state, {
-        lines: {[lineIndex]: {
-          maximised: {$set: !state.lines[lineIndex].maximised}
-        }}
-      });
-    }
     case 'SET_CARD_TITLE': {
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
@@ -244,11 +236,28 @@ function reducer(state = defaultState, action) {
       return newState;
     }
     case 'TOGGLE_LINE_EXPANDED': {
+      console.log("TOGGLE_LINE_EXPANDED", action);
       const lineIndex = findLineIndex(action.lineId);
       return update(state, {
         lines: {[lineIndex]: {
           expanded: {$set: !state.lines[lineIndex].expanded}
         }}
+      });
+    }
+    case 'TOGGLE_LINE_MAXIMISED': {
+      console.log("TOGGLE_LINE_MAXIMISED", action);
+      const lineIndex = findLineIndex(action.lineId);
+      return update(state, {
+        lines: {[lineIndex]: {
+          maximised: {$set: !state.lines[lineIndex].maximised}
+        }}
+      });
+    }
+    case 'DELETE_LINE': {
+      console.log("DELETE_LINE", action);
+      const lineIndex = findLineIndex(action.lineId);
+      return update(state, {
+        lines: { $splice: [[lineIndex, 1]]}
       });
     }
     default: {

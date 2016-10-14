@@ -29,8 +29,9 @@ class Line extends Component {
             <i className={"fa " + (expanded?"fa-caret-down":"fa-caret-right")} style={{width:'12px'}}></i>
             {title}
             <span style={{display:(this.state.mouseOver?'inline':'none')}}>
-            {type == 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-pencil" onClick={this.handleEditClicked.bind(this)}></i>}
-            <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-arrows-alt" onClick={this.handleMaximiseClicked.bind(this)}></i>
+            {expanded &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-arrows-alt" onClick={this.handleMaximiseClicked.bind(this)}></i>}
+            {type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-pencil" onClick={this.handleEditClicked.bind(this)}></i>}
+            {type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-times" onClick={this.handleDeleteClicked.bind(this)}></i>}
           </span>
         </p>
         <div className="columns" style={{display:(expanded?'flex':'none')}}>
@@ -58,6 +59,13 @@ class Line extends Component {
   handleMaximiseClicked(e) {
     e.stopPropagation();
     State.getReduxStore().dispatch({type: 'TOGGLE_LINE_MAXIMISED', lineId: this.props.line.id});
+  }
+
+  handleDeleteClicked(e) {
+    e.stopPropagation();
+    if(confirm("Are you sure you want to delete this line?")) {
+      State.getReduxStore().dispatch({type: 'DELETE_LINE', lineId: this.props.line.id});
+    }
   }
 
   onMouseEnter() {

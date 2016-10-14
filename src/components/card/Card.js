@@ -92,6 +92,7 @@ const cardTarget = {
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index;
     const columnIndex = monitor.getItem().columnIndex;
+    const columnId = monitor.getItem().columnId;
     const hoverIndex = props.index;
 
     // Don't replace items with themselves
@@ -125,8 +126,8 @@ const cardTarget = {
       return;
     }
     // Time to actually perform the action... as long as the card is within the same column.
-    if(columnIndex === props.columnIndex) {
-      console.log("REORDER: idx: " + columnIndex + ", props.idx:" + props.columnIndex);
+    if(columnId === props.columnId) {
+      console.log("REORDER: id: " + columnId + ", props.id:" + props.columnId);
       State.getReduxStore().dispatch({type: 'REORDER_CARD', columnIndex, dragIndex, hoverIndex});
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
