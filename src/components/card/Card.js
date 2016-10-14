@@ -45,7 +45,7 @@ class Card extends Component {
             <input className="cardTitleInput" ref="titleInput" defaultValue={title} onKeyUp={(e) => { if(e.keyCode === 13) {this.setCardTitle()} else if(e.keyCode===27){this.setCardEditMode(false)}}} autoFocus={true} placeholder="Enter card title"/>
           </div>
           :
-          <div className="title" onDoubleClick={() => this.setCardEditMode(true)}>
+          <div className="title" onClick={this.handleCardTitleClicked.bind(this)}> {/*onDoubleClick={() => this.setCardEditMode(true)}>*/}
             <span style={{fontSize:'14px'}}> <i className="card-task-icon fa fa-exclamation-circle"></i> {title}</span>
             {/*<span style={{color:'lightgray'}}> {index}</span>*/}
           </div>
@@ -102,11 +102,15 @@ class Card extends Component {
       return (
         <div style={{position:'absolute', bottom:'10px', right:'5px'}}>
           {assignees.map( (a) => (
-            <img className="card-assignee-image" src={a.imageUrl} alt={"Assigned to " + a.username}/>
+            <img key={a.username} className="card-assignee-image" src={a.imageUrl} alt={"Assigned to " + a.username}/>
           ))}
         </div>
       );
     }
+  }
+
+  handleCardTitleClicked() {
+    State.getReduxStore().dispatch({type: 'SHOW_CARD_PAGE', cardId:this.props.card.id});
   }
 
   setCardTitle() {

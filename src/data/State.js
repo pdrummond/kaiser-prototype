@@ -10,9 +10,14 @@ const boardKey = slug(boardTitle);
 console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardPathName + ")");
 
 let defaultState = {
+  client: {
+    page: {
+      current:'board'
+    },
+  },
   settings: {
     currentCardNumber:4,
-    currentCommentNumber:1,
+    currentCommentNumber:1
   },
   boards: [{
     id: 'board1',
@@ -308,6 +313,26 @@ function reducer(state = defaultState, action) {
       const lineIndex = findLineIndex(action.lineId);
       return update(state, {
         lines: { $splice: [[lineIndex, 1]]}
+      });
+    }
+    case 'SHOW_BOARD_PAGE': {
+      return update(state, {
+        client: {
+          page: {
+            current: {$set: 'board'},
+            cardId: {$set: null}
+          }
+        }
+      });
+    }
+    case 'SHOW_CARD_PAGE': {
+      return update(state, {
+        client: {
+          page: {
+            current: {$set: 'card'},
+            cardId: {$set: action.cardId}
+          }
+        }
       });
     }
     default: {

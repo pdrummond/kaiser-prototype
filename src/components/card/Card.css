@@ -11,6 +11,14 @@
   padding-left:10px;
   font-size:12px;
 }
+
+.Card .title:hover {
+  color:blue;
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+
 .Card .title input {
   outline:none;
   border:none;

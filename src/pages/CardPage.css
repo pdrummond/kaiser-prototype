@@ -1,0 +1,10 @@
+.CardPage {
+  padding:10px;
+  background-color:white;
+  border-radius:10px;
+  width:calc(100% - 120px);
+  height:calc(100% - 120px);
+  margin-top:40px;
+  margin-left:40px;
+
+}
