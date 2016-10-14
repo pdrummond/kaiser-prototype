@@ -4,6 +4,14 @@
   padding:10px;
 }
 
+.TodoList h3 {
+  font-size:12px;
+  text-transform: uppercase;
+  color:gray;
+  font-weight:bold;
+  padding-left:5px;
+}
+
 .TodoList .todos {
   max-height: 200px;
   overflow: scroll;

@@ -72,36 +72,42 @@ class Card extends Component {
   renderTodosBadge(todos) {
     if(todos) {
       const numTodos = todos.length;
-      const numDoneTodos = todos.filter((t) => t.done === true).length;
-      return (
-        <span className="badge" title={numDoneTodos + " of " + numTodos + " todos done"}>
-          <i className="fa fa-check-square-o"></i> {numDoneTodos}/{numTodos}
-          </span>
-        );
+      if(numTodos > 0) {
+        const numDoneTodos = todos.filter((t) => t.done === true).length;
+        return (
+          <span className={"badge" + (numDoneTodos === numTodos? ' complete':'')} title={numDoneTodos + " of " + numTodos + " todos done"}>
+            <i className="fa fa-check-square-o"></i> {numDoneTodos}/{numTodos}
+            </span>
+          );
+        }
       }
     }
 
     renderBugsBadge(bugs) {
       if(bugs) {
         const numBugs = bugs.length;
-        const numDoneBugs = bugs.filter((b) => b.done === true).length;
-        return (
-          <span className="badge" title={numDoneBugs + " of " + numBugs + " bugs done"}>
-            <i className="fa fa-bug"></i> {numDoneBugs}/{numBugs}
-            </span>
-          );
+        if(numBugs > 0) {
+          const numDoneBugs = bugs.filter((b) => b.done === true).length;
+          return (
+            <span className={"badge" + (numDoneBugs === numBugs ? ' complete':'')} title={numDoneBugs + " of " + numBugs + " bugs done"}>
+              <i className="fa fa-bug"></i> {numDoneBugs}/{numBugs}
+              </span>
+            );
+          }
         }
       }
 
       renderCommentsBadge(comments) {
         if(comments) {
           const numComments = comments.length;
-          return (
-            <span className="badge" title={numComments + " comment" + (numComments > 1 ? 's':'')}>
-              <i style={{top:'0px'}} className="card-comments-icon fa fa-comments-o"></i>
-              <span style={{marginLeft:'2px'}}>{numComments}</span>
-            </span>
-          );
+          if(numComments > 0) {
+            return (
+              <span className="badge" title={numComments + " comment" + (numComments > 1 ? 's':'')}>
+                <i style={{top:'0px'}} className="card-comments-icon fa fa-comments-o"></i>
+                <span style={{marginLeft:'2px'}}>{numComments}</span>
+              </span>
+            );
+          }
         }
       }
 

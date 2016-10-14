@@ -1,7 +1,12 @@
 .TodoItem {
-  padding:5px;  
+  padding:5px;
 }
 
 .TodoItem:hover {
   background-color:whitesmoke;
+}
+
+.TodoItem label {
+  font-size:12px;
+  color:gray;
 }

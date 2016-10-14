@@ -11,9 +11,12 @@ class TodoList extends Component {
         todos
       }
     } = this.props;
+    const numTodos = todos.length;
+    const numDoneTodos = todos.filter((t) => t.done === true).length;
     return (
       <div className="TodoList">
-        <div className="todos">
+        <h3>Development Todos <span style={{color:(numTodos===numDoneTodos?'#8bc34a':'black')}}>({numDoneTodos}/{numTodos})</span></h3>
+        <div className="todos" style={{marginBottom:'10px'}}>
         {todos.map( (todo) => (
           <TodoItem key={todo.id} card={this.props.card} todo={todo} columnId={this.props.columnId}/>
         ))}
@@ -27,6 +30,7 @@ class TodoList extends Component {
     const title = findDOMNode(this.refs.addTodoInput).value.trim();
     if(title && title.length > 0) {
       State.getReduxStore().dispatch({type: 'ADD_TODO', columnId:this.props.columnId, cardId:this.props.card.id, title});
+      findDOMNode(this.refs.addTodoInput).value = '';
     }
   }
 }

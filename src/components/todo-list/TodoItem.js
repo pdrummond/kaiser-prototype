@@ -14,6 +14,10 @@ class TodoItem extends Component {
       <div className="TodoItem">
         <label><input ref="checkBoxInput" type="checkbox" checked={todo.done} onChange={this.handleCheckClicked.bind(this)}/> {todo.title}</label>
         <div style={{float:'right', paddingRight:'10px'}}>
+          <select style={{marginRight:'10px'}}>
+            <option value="pdrummond">Paul Drummond</option>
+            <option value="jswan">John Swan</option>
+          </select>
           <i className="fa fa-times icon-button" onClick={this.handleDeleteClicked.bind(this)}/>
         </div>
       </div>

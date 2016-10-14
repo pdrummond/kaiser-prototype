@@ -52,6 +52,11 @@
   border:1px solid lightgray;
 }
 
+.Card .badge.complete {
+  background-color:#8bc34a;
+  color:white;
+}
+
 .Card .badge i {
   position:relative;
   top:1px;
