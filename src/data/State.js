@@ -11,7 +11,8 @@ console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardP
 
 let defaultState = {
   settings: {
-    currentCardNumber:0
+    currentCardNumber:4,
+    currentCommentNumber:1,
   },
   boards: [{
     id: 'board1',
@@ -52,7 +53,40 @@ let defaultState = {
     id: 'backlog/triage',
     title: "Triage",
     backgroundColor: '#F76F84',
-    cards:[]
+    cards:[{
+      id:1,
+      title: 'Card One',
+      todos:[{
+        id:2,
+        title:'Todo 1',
+        done:true
+      },{
+        id:3,
+        title:'Todo 2',
+        done:false
+      }],
+      bugs:[{
+        id:4,
+        title:'Bug 1',
+        done:false
+      }],
+      comments:[{
+          id:1,
+          username: 'pdrummond',
+          text:'This is comment 1'
+      }, {
+        id:2,
+        username: 'john',
+        text:'This is comment 2'
+      }],
+      assignees:[{
+        username: 'pdrummond',
+        imageUrl: '/images/pdrummond.png'
+      },{
+        username: 'john',
+        imageUrl: '/images/john_swan.png'
+      }]
+    }]
   },{
     id: 'backlog/accepted',
     title: "Accepted",
