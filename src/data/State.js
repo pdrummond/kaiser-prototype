@@ -46,66 +46,82 @@ let defaultState = {
   columns: [{
     id: 'backlog/incoming',
     title: "Incoming",
+    backgroundColor: '#F98295',
     cards:[]
   },{
     id: 'backlog/triage',
     title: "Triage",
+    backgroundColor: '#F76F84',
     cards:[]
   },{
     id: 'backlog/accepted',
     title: "Accepted",
+    backgroundColor: '#F36077',
     cards:[]
   },{
     id: 'backlog/rejected',
     title: "Rejected",
+    backgroundColor: '#E65068',
     cards:[]
   },{
     id: 'backlog/out-of-scope',
     title: "Out of Scope",
+    backgroundColor: '#CB3F55',
     cards:[]
   },{
     id: 'test/ready',
     title: "Test Ready",
+    backgroundColor: '#86E7A0',
     cards:[]
   },{
     id: 'test/testing',
     title: "Testing",
+    backgroundColor: '#64D281',
     cards:[]
   },{
     id: 'test/paused',
     title: "Paused",
+    backgroundColor: '#48BA66',
     cards:[]
   },{
     id: 'done/ready',
     title: "Release Ready",
+    backgroundColor: '#E485D2',
     cards:[]
   },{
     id: 'done/release1-0',
     title: "Release 1.0",
+    backgroundColor: '#CD61B8',
     cards:[]
   },{
     id: 'done/release1-1',
     title: "Release 1.1",
+    backgroundColor: '#B3459E',
     cards:[]
   },{
     id: 'done/release2-0',
     title: "Release 2.0",
+    backgroundColor: '#9c3689',
     cards:[]
   },{
     id: 'scratch/requests',
     title: "Requests",
+    backgroundColor: '#FFC7AA',
     cards:[]
   },{
     id: 'scratch/ideas',
     title: "Ideas",
+    backgroundColor: '#D48E6A',
     cards:[]
   },{
     id: 'scratch/notes',
     title: "Notes",
+    backgroundColor: '#AA5F39',
     cards:[]
   },{
     id: 'scratch/trash',
     title: "Trash",
+    backgroundColor: '#803915',
     cards:[]
   }]
 };
