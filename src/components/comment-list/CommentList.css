@@ -1,9 +1,8 @@
 .CommentList {
   height:100%;
   xborder:1px solid lightgray;
-  width:90%;
-  padding:10px;
-  padding-right:240px;
+  width: calc(100% - 20px);
+  padding:10px;  
 }
 
 .CommentList h3 {
@@ -14,9 +13,10 @@
   padding-left:5px;
 }
 
-.CommentList .Comments {
-  max-height: 200px;
+.CommentList .comments {
+  height: calc(100% - 255px);
   overflow: scroll;
+
 }
 
 .CommentList .addCommentInput {

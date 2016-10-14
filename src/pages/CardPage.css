@@ -12,6 +12,7 @@
 
 .CardPage > .contentArea {
   padding-right:240px;
+  height: calc(100% - 160px);
 }
 
 .CardPage > .contentArea .checkLists {

@@ -67,7 +67,7 @@
 }
 
 .Line.component .Column {
-  background-color:#f5eb98;
+  xbackground-color:#f5eb98;
 }
 
 .Line.component .Column.active {
@@ -75,7 +75,7 @@
 }
 
 .Line.test .Column {
-  background-color:#009688;
+  xbackground-color:#009688;
 }
 
 .Line.test .Column.active {
@@ -83,7 +83,7 @@
 }
 
 .Line.done .Column {
-  background-color:#e0816f;
+  xbackground-color:#e0816f;
 }
 
 .Line.done .Column.active {
@@ -91,7 +91,7 @@
 }
 
 .Line.scratch .Column {
-  background-color:#838C91;
+  xbackground-color:#838C91;
 }
 
 .Line.scratch .Column.active {

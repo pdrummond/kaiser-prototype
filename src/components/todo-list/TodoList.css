@@ -1,9 +1,12 @@
 .TodoList {
+  position:relative;
   border:1px solid lightgray;
   width:45%;
   padding:10px;
   margin-left:10px;
   margin-right:20px;
+  border-radius:5px;
+  box-shadow: 2px 2px 5px 1px whitesmoke;
 }
 
 .TodoList h3 {
@@ -15,12 +18,15 @@
 }
 
 .TodoList .todos {
-  max-height: 200px;
+  height: 110px;
   overflow: scroll;
+  padding-bottom:30px;
 }
 
 .TodoList .addTodoInput {
-  width:calc(100% - 30px);
+  position:absolute;
+  bottom:5px;
+  width:calc(100% - 40px);
   background:whitesmoke;
   border:1px solid lightgray;
   outline:none;
