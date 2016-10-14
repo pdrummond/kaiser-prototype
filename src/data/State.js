@@ -301,27 +301,31 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'ADD_CARD_ASSIGNEE': {
-      const columnIndex = findColumnIndex(action.columnId);
-      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
-      let assigneeData;
-      if(action.assignee === 'pdrummond') {
-        assigneeData = {
-          username: 'pdrummond',
-          imageUrl: '/images/pdrummond.png'
+      if(action.assignee === 'pdrummond' || action.assignee === 'john') {
+        const columnIndex = findColumnIndex(action.columnId);
+        const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+        let assigneeData;
+        if(action.assignee === 'pdrummond') {
+          assigneeData = {
+            username: 'pdrummond',
+            imageUrl: '/images/pdrummond.png'
+          }
+        } else if(action.assignee === 'john') {
+          assigneeData = {
+            username: 'john',
+            imageUrl: '/images/john_swan.png'
+          }
         }
-      } else if(action.assignee === 'john') {
-        assigneeData = {
-          username: 'john',
-          imageUrl: '/images/john_swan.png'
-        }
-      }
-      return update(state, {
-        columns: {[columnIndex]: {
-          cards: {[cardIndex]: {
-            assignees: { $push: [assigneeData]}
+        return update(state, {
+          columns: {[columnIndex]: {
+            cards: {[cardIndex]: {
+              assignees: { $push: [assigneeData]}
+            }}
           }}
-        }}
-      });
+        });
+      } else {
+        return state;
+      }
     }
     case 'NEW_CARD': {
       const columnIndex = findColumnIndex('backlog/incoming');
