@@ -62,9 +62,9 @@ class Card extends Component {
   }
 
   renderTodosBadge(todos) {
-    const numTodos = todos.length;
-    const numDoneTodos = todos.filter((t) => t.done === true).length;
     if(todos) {
+      const numTodos = todos.length;
+      const numDoneTodos = todos.filter((t) => t.done === true).length;
       return (
         <span className="badge" title={numDoneTodos + " of " + numTodos + " todos done"}>
           <i className="card-todo-icon fa fa-check-square-o"></i> {numDoneTodos}/{numTodos}
@@ -74,9 +74,9 @@ class Card extends Component {
   }
 
   renderBugsBadge(bugs) {
-    const numBugs = bugs.length;
-    const numDoneBugs = bugs.filter((b) => b.done === true).length;
     if(bugs) {
+      const numBugs = bugs.length;
+      const numDoneBugs = bugs.filter((b) => b.done === true).length;
       return (
         <span className="badge" title={numDoneBugs + " of " + numBugs + " bugs done"}>
           <i className="card-bug-icon fa fa-bug"></i> {numDoneBugs}/{numBugs}
@@ -86,8 +86,8 @@ class Card extends Component {
   }
 
   renderCommentsBadge(comments) {
-    const numComments = comments.length;
-    if(numComments) {
+    if(comments) {
+      const numComments = comments.length;
       return (
         <span className="badge" title={numComments + " comment" + (numComments > 1 ? 's':'')}>
           <i style={{top:'0px'}} className="card-comments-icon fa fa-comments-o"></i>
@@ -132,7 +132,11 @@ const cardSource = {
       title:props.card.title,
       index: props.index,
       columnIndex: props.columnIndex,
-      columnId: props.columnId
+      columnId: props.columnId,
+      todos:props.card.todos,
+      bugs:props.card.bugs,
+      comments:props.card.comments,
+      assignees:props.card.assignees
     };
   }
 };
