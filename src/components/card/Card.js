@@ -114,7 +114,7 @@ class Card extends Component {
       renderAssignees(assignees) {
         if(assignees) {
           return (
-            <div style={{position:'absolute', bottom:'10px', right:'5px'}}>
+            <div style={{position:'absolute', bottom:'0px', right:'5px'}}>
               {assignees.map( (a) => (
                 <img key={a.username} className="card-assignee-image" src={a.imageUrl} alt={"Assigned to " + a.username}/>
               ))}

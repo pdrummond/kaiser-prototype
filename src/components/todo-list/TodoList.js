@@ -15,7 +15,7 @@ class TodoList extends Component {
     const numDoneTodos = todos.filter((t) => t.done === true).length;
     return (
       <div className="TodoList">
-        <h3>Development Todos <span style={{color:(numTodos===numDoneTodos?'#8bc34a':'black')}}>({numDoneTodos}/{numTodos})</span></h3>
+        <h3>Todos <span style={{color:(numTodos===numDoneTodos?'#8bc34a':'black')}}>({numDoneTodos}/{numTodos})</span></h3>
         <div className="todos" style={{marginBottom:'10px'}}>
         {todos.map( (todo) => (
           <TodoItem key={todo.id} card={this.props.card} todo={todo} columnId={this.props.columnId}/>

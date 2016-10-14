@@ -3,6 +3,7 @@
   xborder:1px solid lightgray;
   width:90%;
   padding:10px;
+  padding-right:240px;
 }
 
 .CommentList h3 {
@@ -21,7 +22,7 @@
 .CommentList .addCommentInput {
   position:absolute;
   bottom:10px;
-  width:800px;
+  width:calc(100% - 320px);
   background:whitesmoke;
   border:1px solid lightgray;
   outline:none;

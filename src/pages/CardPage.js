@@ -4,6 +4,7 @@ import * as State from '../data/State';
 import './CardPage.css';
 import * as CardIcon from '../utils/CardIcon';
 import TodoList from '../components/todo-list/TodoList';
+import BugList from '../components/bug-list/BugList';
 import CommentList from '../components/comment-list/CommentList';
 
 class CardPage extends Component {
@@ -15,7 +16,10 @@ class CardPage extends Component {
         <i onClick={this.handleBackClick.bind(this)} className="icon-button fa fa-times"></i>
         <p>{this.renderCardTitle()}</p>
         <div className="contentArea">
+          <div className="checkLists">
           <TodoList card={this.card} columnId={this.props.columnId}/>
+          <BugList card={this.card} columnId={this.props.columnId}/>
+          </div>
           <CommentList card={this.card} columnId={this.props.columnId}/>
         </div>
 

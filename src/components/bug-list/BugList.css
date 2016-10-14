@@ -1,12 +1,10 @@
-.TodoList {
+.BugList {
   border:1px solid lightgray;
   width:45%;
   padding:10px;
-  margin-left:10px;
-  margin-right:20px;
 }
 
-.TodoList h3 {
+.BugList h3 {
   font-size:12px;
   text-transform: uppercase;
   color:gray;
@@ -14,12 +12,12 @@
   padding-left:5px;
 }
 
-.TodoList .todos {
+.BugList .bugs {
   max-height: 200px;
   overflow: scroll;
 }
 
-.TodoList .addTodoInput {
+.BugList .addBugInput {
   width:calc(100% - 30px);
   background:whitesmoke;
   border:1px solid lightgray;

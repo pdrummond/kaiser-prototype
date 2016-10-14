@@ -1,0 +1,12 @@
+.BugItem {
+  padding:5px;
+}
+
+.BugItem:hover {
+  background-color:whitesmoke;
+}
+
+.BugItem label {
+  font-size:12px;
+  color:gray;
+}

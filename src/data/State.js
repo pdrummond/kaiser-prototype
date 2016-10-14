@@ -425,11 +425,53 @@ function reducer(state = defaultState, action) {
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
       const card = findCard(state.columns[columnIndex], action.cardId);
-      const todoIndex = findTodoIndex(card, action.todoId);
+      const todoIndex = findBugIndex(card, action.todoId);
       return update(state, {
         columns: {[columnIndex]: {
           cards: {[cardIndex]: {
             todos: { $splice: [[todoIndex, 1]]}
+          }}
+        }}
+      });
+    }
+    case 'NEW_BUG': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            bugs: { $push: [{
+              id: uuid.v1(),
+              title: action.title
+            }]}
+          }}
+        }}
+      });
+    }
+    case 'TOGGLE_BUG_DONE': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      const card = findCard(state.columns[columnIndex], action.cardId);
+      const bugIndex = findBugIndex(card, action.bugId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            bugs: { [bugIndex]: {
+              done: {$set: action.done}
+            }}
+          }}
+        }}
+      });
+    }
+    case 'DELETE_BUG': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      const card = findCard(state.columns[columnIndex], action.cardId);
+      const bugIndex = findBugIndex(card, action.bugId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            bugs: { $splice: [[bugIndex, 1]]}
           }}
         }}
       });
@@ -443,7 +485,7 @@ function reducer(state = defaultState, action) {
             comments: { $push: [{
               id: uuid.v1(),
               username: 'pdrummond',
-              userImageUrl: '/images/pdrummond.png',              
+              userImageUrl: '/images/pdrummond.png',
               text: action.text,
               createdAt: new Date(),
             }]}
@@ -507,4 +549,12 @@ export function findTodo(card, todoId) {
 
 export function findTodoIndex(card, todoId) {
   return card.todos.findIndex( (todo) => (todo.id === todoId));
+}
+
+export function findBug(card, bugId) {
+  return card.bugs.find( (bug) => (bug.id === bugId));
+}
+
+export function findBugIndex(card, bugId) {
+  return card.bugs.findIndex( (bug) => (bug.id === bugId));
 }

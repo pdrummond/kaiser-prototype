@@ -14,6 +14,10 @@
   padding-right:240px;
 }
 
+.CardPage > .contentArea .checkLists {
+  display:flex;
+}
+
 .CardPage > .rightSidebar {
   position:absolute;
   width:200px;
