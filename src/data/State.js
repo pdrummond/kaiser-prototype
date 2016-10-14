@@ -318,9 +318,10 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'REORDER_CARD': {
-      const dragCard = state.columns[action.columnIndex].cards[action.dragIndex];
+      const columnIndex = findColumnIndex(action.columnId);
+      const dragCard = state.columns[columnIndex].cards[action.dragIndex];
       return update(state, {
-        columns: {[action.columnIndex]: {
+        columns: {[columnIndex]: {
         cards: { $splice: [
             [action.dragIndex, 1],
             [action.hoverIndex, 0, dragCard]
@@ -342,8 +343,6 @@ function reducer(state = defaultState, action) {
           cards: { $push: [dragCard]}
         }}
       });
-      //state.columns[action.columnIndex]
-      console.log("newState:", newState);
       return newState;
     }
     case 'TOGGLE_LINE_EXPANDED': {

@@ -12,7 +12,7 @@
   background-color: #F99560;
 }
 
-.Column.active .title {
+.Column.active > .title {
   color:white;
 }
 

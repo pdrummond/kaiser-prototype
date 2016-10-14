@@ -45,9 +45,8 @@ class Card extends Component {
             <input className="cardTitleInput" ref="titleInput" defaultValue={title} onKeyUp={(e) => { if(e.keyCode === 13) {this.setCardTitle()} else if(e.keyCode===27){this.setCardEditMode(false)}}} autoFocus={true} placeholder="Enter card title"/>
           </div>
           :
-          <div className="title" onClick={this.handleCardTitleClicked.bind(this)}> {/*onDoubleClick={() => this.setCardEditMode(true)}>*/}
+          <div className="title" onClick={this.handleCardTitleClicked.bind(this)}>
             {this.renderCardTitle()}
-            {/*<span style={{color:'lightgray'}}> {index}</span>*/}
           </div>
         }
         <div style={{paddingLeft:'10px', fontSize:'12px', color:'gray', position:'relative', top:'4px'}}>
@@ -144,6 +143,7 @@ class Card extends Component {
         return {
           id: props.card.id,
           title:props.card.title,
+          type:props.card.type,
           index: props.index,
           columnIndex: props.columnIndex,
           columnId: props.columnId,
@@ -158,7 +158,6 @@ class Card extends Component {
     const cardTarget = {
       hover(props, monitor, component) {
         const dragIndex = monitor.getItem().index;
-        const columnIndex = monitor.getItem().columnIndex;
         const columnId = monitor.getItem().columnId;
         const hoverIndex = props.index;
 
@@ -194,7 +193,7 @@ class Card extends Component {
         }
         // Time to actually perform the action... as long as the card is within the same column.
         if(columnId === props.columnId) {
-          State.getReduxStore().dispatch({type: 'REORDER_CARD', columnIndex, dragIndex, hoverIndex});
+          State.getReduxStore().dispatch({type: 'REORDER_CARD', columnId, dragIndex, hoverIndex});
           // Note: we're mutating the monitor item here!
           // Generally it's better to avoid mutations,
           // but it's good here for the sake of performance
