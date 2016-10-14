@@ -24,7 +24,7 @@ class App extends Component {
     const columnId = this.props.state.client ? this.props.state.client.page.columnId : null;
 
     switch(currentPage) {
-      case 'board': return (<BoardPage boards={this.props.state.boards} lines={this.props.state.lines}/>);
+      case 'board': return (<BoardPage state={this.props.state}/>);
       case 'card': return (<CardPage columnId={columnId} cardId={cardId}/>);
       default: console.error("Unknown page: " + currentPage);
     }

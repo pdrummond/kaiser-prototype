@@ -23,11 +23,18 @@ class Line extends Component {
       }
     } = this.props;
 
+    let numCards = 0;
+    this.props.columns.forEach((column) => {
+      if(column.lineId === this.props.line.id) {
+        numCards += column.cards.length;
+      }
+    });
+
     return (
       <div className={`Line ${type}`} style={{height: (expanded?(maximised?'800px':'300px'):'30px')}} onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
         <p className="title" onClick={this.handleTitleClicked.bind(this)}>
             <i className={"fa " + (expanded?"fa-caret-down":"fa-caret-right")} style={{width:'12px'}}></i>
-            {title}
+            {title} <span style={{color:(numCards > 0 ? 'white':'')}}>({numCards})</span>
             <span style={{display:(this.state.mouseOver?'inline':'none')}}>
             {expanded &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-arrows-alt" onClick={this.handleMaximiseClicked.bind(this)}></i>}
             {type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-pencil" onClick={this.handleEditClicked.bind(this)}></i>}

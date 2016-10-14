@@ -15,11 +15,11 @@ class Board extends Component {
         <div className="lines">
         {this.props.lines.map( (line) => {
           switch(line.type) {
-            case 'backlog': return (<BacklogLine key={line.id} line={line}/>);
-            case 'component': return (<ComponentLine key={line.id} line={line}/>);
-            case 'test': return (<TestLine key={line.id} line={line}/>);
-            case 'done': return (<DoneLine key={line.id} line={line}/>);
-            case 'scratch': return (<ScratchLine key={line.id} line={line}/>);
+            case 'backlog': return (<BacklogLine key={line.id} line={line} columns={this.props.columns}/>);
+            case 'component': return (<ComponentLine key={line.id} line={line} columns={this.props.columns}/>);
+            case 'test': return (<TestLine key={line.id} line={line} columns={this.props.columns}/>);
+            case 'done': return (<DoneLine key={line.id} line={line} columns={this.props.columns}/>);
+            case 'scratch': return (<ScratchLine key={line.id} line={line} columns={this.props.columns}/>);
             default: console.error("Invalid line type: " + line.type); return null;
           }
         })}

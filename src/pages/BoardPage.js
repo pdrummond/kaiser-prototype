@@ -12,7 +12,7 @@ class BoardPage extends Component {
   }
   render() {
     //For now just pick out the first board.
-    const board = this.props.boards[0];
+    const board = this.props.state.board;
     return (
       <div className="BoardPage">
         <div className="buttonMenu">
@@ -24,7 +24,7 @@ class BoardPage extends Component {
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
         </div>
-        <Board board={board} lines={this.props.lines}/>
+        <Board board={board} lines={this.props.state.lines} columns={this.props.state.columns}/>
       </div>
     );
   }
