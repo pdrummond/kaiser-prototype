@@ -3,7 +3,8 @@
 }
 
 .Column {
-  background-color:#E2E4E6;
+  xbackground-color:#E2E4E6;
+  background-color:#87B4DD;
   box-shadow: 2px 2px 10px 1px #214A6E;
 }
 
@@ -22,16 +23,25 @@
 }
 
 .Card {
-  background-color: white;  
+  background-color: white;
 }
 
 .Card > .title {
   color: #4d4d4d;
 }
 
-.Card .card-task-icon {
+.card-task-icon {
   color: #03A9F4;
 }
+
+.card-bug-icon {
+  color: brown;
+}
+
+.card-enhancement-icon {
+  color: purple;
+}
+
 
 .Card .badge {
   background-color:#fbfbfb;
@@ -49,6 +59,22 @@
 
 .Line > .title {
   color:#bacee0;
+}
+
+.Line.component .Column {
+  background-color:#f5eb98;
+}
+
+.Line.test .Column {
+  background-color:#009688;
+}
+
+.Line.done .Column {
+  background-color:#e0816f;
+}
+
+.Line.scratch .Column {
+  background-color:#838C91;
 }
 
 button {

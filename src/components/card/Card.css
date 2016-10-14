@@ -6,6 +6,10 @@
   padding-bottom:10px;
 }
 
+.Card:hover {
+  cursor:grab;
+}
+
 .Card .title {
   padding:5px;
   padding-left:10px;

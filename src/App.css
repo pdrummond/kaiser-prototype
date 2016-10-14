@@ -8,3 +8,17 @@ html, body, #root {
   overflow:hidden;
   padding: 10px 0px 10px 10px;
 }
+
+.icon-button {
+  color:gray;
+}
+
+.icon-button:hover {
+  color:orange;
+  cursor:pointer;
+}
+
+.icon-button:active {
+  color:black;
+  cursor:pointer;
+}

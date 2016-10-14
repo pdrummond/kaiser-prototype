@@ -16,7 +16,7 @@ let defaultState = {
     },
   },
   settings: {
-    currentCardNumber:4,
+    currentCardNumber:5,
     currentCommentNumber:1
   },
   boards: [{
@@ -31,6 +31,12 @@ let defaultState = {
     expanded: true,
     columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
   },{
+    id: 'dev',
+    title: "Development",
+    type: 'component',
+    expanded: true,
+    columnIds: ['dev/todo', 'dev/doing', 'dev/paused', 'dev/blocked', 'dev/review'],
+  },{
     id: 'test',
     title: "Test",
     type: 'test',
@@ -40,7 +46,7 @@ let defaultState = {
     id: 'done',
     title: "Done",
     type: 'done',
-    expanded: false,
+    expanded: true,
     columnIds: ['done/ready', 'done/release1-0', 'done/release1-1', 'done/release2-0'],
   },{
     id: 'scratch',
@@ -60,7 +66,8 @@ let defaultState = {
     backgroundColor: '#F76F84',
     cards:[{
       id:1,
-      title: 'Card One',
+      title: 'This is a task with todos,bugs and comments',
+      type:'task',
       todos:[{
         id:2,
         title:'Todo 1',
@@ -91,6 +98,13 @@ let defaultState = {
         username: 'john',
         imageUrl: '/images/john_swan.png'
       }]
+    }, {
+      id:5,
+      title: 'This is a bug',
+      type:'bug',
+      todos:[],
+      bugs:[],
+      comments:[]
     }]
   },{
     id: 'backlog/accepted',
@@ -105,6 +119,31 @@ let defaultState = {
   },{
     id: 'backlog/out-of-scope',
     title: "Out of Scope",
+    backgroundColor: '#CB3F55',
+    cards:[]
+  },{
+    id: 'dev/todo',
+    title: "Todo",
+    backgroundColor: '#CB3F55',
+    cards:[]
+  },{
+    id: 'dev/doing',
+    title: "Doing",
+    backgroundColor: '#CB3F55',
+    cards:[]
+  },{
+    id: 'dev/paused',
+    title: "Paused",
+    backgroundColor: '#CB3F55',
+    cards:[]
+  },{
+    id: 'dev/blocked',
+    title: "Blocked",
+    backgroundColor: '#CB3F55',
+    cards:[]
+  },{
+    id: 'dev/review',
+    title: "Review",
     backgroundColor: '#CB3F55',
     cards:[]
   },{
@@ -233,6 +272,17 @@ function reducer(state = defaultState, action) {
         }}
       });
     }
+    case 'SET_CARD_TYPE': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            type: {$set: action.cardType}
+          }}
+        }}
+      });
+    }
     case 'SET_CARD_EDIT_MODE': {
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
@@ -256,6 +306,7 @@ function reducer(state = defaultState, action) {
           cards: { $push: [{
             id: newState.settings.currentCardNumber,
             title: 'Card '  + newState.settings.currentCardNumber,
+            type:'task',
             editMode: true
           }]}
         }}
@@ -330,7 +381,8 @@ function reducer(state = defaultState, action) {
         client: {
           page: {
             current: {$set: 'card'},
-            cardId: {$set: action.cardId}
+            cardId: {$set: action.cardId},
+            columnId: {$set: action.columnId}
           }
         }
       });

@@ -33,10 +33,10 @@ class Column extends Component {
       }
     } = this.props;
     const isActive = canDrop && isOver;
-    const backgroundColor = '#87B4DD';//this.props.column.backgroundColor ? this.props.column.backgroundColor : '#E2E4E6';
+    //const backgroundColor = //this.props.column.backgroundColor ? this.props.column.backgroundColor : '#E2E4E6';
 
     return connectDropTarget(
-      <div className={"Column" + (isActive ? ' active':'')} style={{backgroundColor}}>
+      <div className={"Column" + (isActive ? ' active':'')}>
         <div className="title">{title} <span style={{color:'#565151', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
         <div className="cards">
           {this.props.column.cards.map( (card, index) => {
