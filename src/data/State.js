@@ -86,11 +86,15 @@ let defaultState = {
       comments:[{
           id:1,
           username: 'pdrummond',
-          text:'This is comment 1'
+          userImageUrl: '/images/pdrummond.png',
+          text:'This is comment 1',
+          createdAt: new Date(),
       }, {
         id:2,
         username: 'john',
-        text:'This is comment 2'
+        userImageUrl: '/images/john_swan.png',
+        text:'This is comment 2',
+        createdAt: new Date(),
       }],
       assignees:[{
         username: 'pdrummond',
@@ -388,10 +392,9 @@ function reducer(state = defaultState, action) {
         }
       });
     }
-    case 'ADD_TODO': {
+    case 'NEW_TODO': {
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
-      console.log("ADD_TODO", columnIndex, cardIndex);
       return update(state, {
         columns: {[columnIndex]: {
           cards: {[cardIndex]: {
@@ -431,7 +434,23 @@ function reducer(state = defaultState, action) {
         }}
       });
     }
-
+    case 'NEW_COMMENT': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            comments: { $push: [{
+              id: uuid.v1(),
+              username: 'pdrummond',
+              userImageUrl: '/images/pdrummond.png',              
+              text: action.text,
+              createdAt: new Date(),
+            }]}
+          }}
+        }}
+      });
+    }
     default: {
       return state;
     }

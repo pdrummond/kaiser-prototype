@@ -1,0 +1,21 @@
+.CommentItem {
+  padding:5px;
+  font-size:14px;
+}
+
+.CommentItem:hover {
+  background-color:whitesmoke;
+}
+
+.CommentItem label {
+  font-size:12px;
+  color:gray;
+}
+
+.CommentItem img {
+  float:left;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-left:2px;
+}

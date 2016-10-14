@@ -29,7 +29,7 @@ class TodoList extends Component {
   handleNewTodo() {
     const title = findDOMNode(this.refs.addTodoInput).value.trim();
     if(title && title.length > 0) {
-      State.getReduxStore().dispatch({type: 'ADD_TODO', columnId:this.props.columnId, cardId:this.props.card.id, title});
+      State.getReduxStore().dispatch({type: 'NEW_TODO', columnId:this.props.columnId, cardId:this.props.card.id, title});
       findDOMNode(this.refs.addTodoInput).value = '';
     }
   }

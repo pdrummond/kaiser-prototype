@@ -4,6 +4,7 @@ import * as State from '../data/State';
 import './CardPage.css';
 import * as CardIcon from '../utils/CardIcon';
 import TodoList from '../components/todo-list/TodoList';
+import CommentList from '../components/comment-list/CommentList';
 
 class CardPage extends Component {
 
@@ -15,6 +16,7 @@ class CardPage extends Component {
         <p>{this.renderCardTitle()}</p>
         <div className="contentArea">
           <TodoList card={this.card} columnId={this.props.columnId}/>
+          <CommentList card={this.card} columnId={this.props.columnId}/>
         </div>
 
         <div className="rightSidebar">
