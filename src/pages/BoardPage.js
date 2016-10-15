@@ -19,6 +19,8 @@ class BoardPage extends Component {
           <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>
           <button onClick={this.newComponent.bind(this)}>New Component</button>
           <button onClick={this.clearBoard.bind(this)}>Clear Board</button>
+          <button onClick={this.handleExpandAllLines.bind(this)}>Expand All Lines</button>
+          <button onClick={this.handleCollapseAllLines.bind(this)}>Collapse All Lines</button>
           <button onClick={this.handleToggleLineSummaryBadges.bind(this)}>Toggle Line Summaries</button>
           {/*<button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
@@ -104,6 +106,14 @@ class BoardPage extends Component {
 
   handleToggleLineSummaryBadges() {
     State.getReduxStore().dispatch({type: 'TOGGLE_LINE_SUMMARY_BADGES'});
+  }
+
+  handleExpandAllLines() {
+    State.getReduxStore().dispatch({type: 'EXPAND_ALL_LINES'});
+  }
+
+  handleCollapseAllLines() {
+    State.getReduxStore().dispatch({type: 'COLLAPSE_ALL_LINES'});
   }
 }
 

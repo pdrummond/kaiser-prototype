@@ -618,6 +618,28 @@ function reducer(state = defaultState, action) {
         }
       });
     }
+    case 'EXPAND_ALL_LINES': {
+      let newState = state;
+      state.lines.forEach( (line, lineIndex) => {
+        newState = update(newState, {
+          lines: {[lineIndex]: {
+            expanded: {$set: true}
+          }}
+        });
+      });
+      return newState;
+    }
+    case 'COLLAPSE_ALL_LINES': {
+      let newState = state;
+      state.lines.forEach( (line, lineIndex) => {
+        newState = update(newState, {
+          lines: {[lineIndex]: {
+            expanded: {$set: false}
+          }}
+        });
+      });
+      return newState;
+    }    
     default: {
       return state;
     }

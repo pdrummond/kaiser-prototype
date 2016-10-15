@@ -53,7 +53,7 @@ class Column extends Component {
               );
           })}
           {!showNewCardInput && <a href="" className="newCardLink" onClick={this.handleNewCardLinkClicked.bind(this)}>New Card...</a>}
-          {showNewCardInput && <input ref="newCardInput" className="newCardInput" placeholder="" onKeyUp={(e) => { if(e.keyCode === 13) { this.handleCardInputEnterPressed()} else if(e.keyCode == 27) {this.handleCardInputEscPressed()} }} autoFocus={true}/>}
+          {showNewCardInput && <input ref="newCardInput" className="newCardInput" placeholder="" onKeyUp={(e) => { if(e.keyCode === 13) { this.handleCardInputEnterPressed()} else if(e.keyCode === 27) {this.handleCardInputEscPressed()} }} autoFocus={true}/>}
         </div>
 
       </div>
