@@ -6,6 +6,11 @@ html, body, #root {
 .App {
   height:100%;
   overflow:hidden;
+}
+
+.AppInner {
+  height:100%;
+  overflow:hidden;
   padding: 10px 0px 10px 10px;
 }
 
@@ -21,4 +26,11 @@ html, body, #root {
 .icon-button:active {
   color:black;
   cursor:pointer;
+}
+
+.TopBanner {
+  background-color:#214a6e;
+  width:100%;
+  padding:10px;
+  color:#87B4DD;
 }

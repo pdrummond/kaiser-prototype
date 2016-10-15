@@ -14,7 +14,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.renderCurrentPage()}
+        <div className="TopBanner">
+          <div>This is a prototype of <span style={{color:'white'}}>KAISER</span>. All data is persisted locally.  To create a new board, just add a key to the url,
+            like "/board1" for example.
+          </div>
+        </div>
+
+        <div className="AppInner">
+          {this.renderCurrentPage()}
+        </div>
       </div>
     );
   }
