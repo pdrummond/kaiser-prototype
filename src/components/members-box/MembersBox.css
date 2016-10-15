@@ -1,0 +1,14 @@
+.MembersBox {
+  position:absolute;
+  top:15px;
+  right:70px;
+  cursor:pointer;
+}
+
+.MembersBox img {
+  margin-left:5px;
+  width:30px;
+  height:30px;
+  border:1px solid #214A6E;
+  border-radius:5px;
+}

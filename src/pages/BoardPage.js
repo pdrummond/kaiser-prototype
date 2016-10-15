@@ -24,7 +24,7 @@ class BoardPage extends Component {
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
         </div>
-        <Board board={board} lines={this.props.state.lines} columns={this.props.state.columns}/>
+        <Board state={this.props.state}/>
       </div>
     );
   }

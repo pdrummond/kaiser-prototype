@@ -23,7 +23,14 @@ let defaultState = {
   },
   board: {
     id: 'board1',
-    title: boardTitle
+    title: boardTitle,
+    members: [{
+      username: 'pdrummond',
+      imageUrl: '/images/pdrummond.png'
+    },{
+      username: 'jswan',
+      imageUrl: '/images/john_swan.png'
+    }]
   },
   lines: [{
     id: 'backlog',
@@ -569,6 +576,43 @@ function reducer(state = defaultState, action) {
         }
       });
     }
+    case 'SHOW_MEMBERS_PAGE': {
+      return update(state, {
+        client: {
+          page: {
+            current: {$set: 'members'},
+          }
+        }
+      });
+    }
+    case 'SET_MEMBER_IMAGE_URL': {
+      const memberIndex = findMemberIndex(action.username);
+      return update(state, {
+        board: {
+          members: {[memberIndex]: {
+            imageUrl: {$set: action.imageUrl}
+          }}
+        }
+      });
+    }
+    case 'NEW_MEMBER': {
+      return update(state, {
+        board: {
+          members: { $push: [{
+            username: action.username,
+            imageUrl: '/images/placeholder.png'
+          }]}
+        }
+      });
+    }
+    case 'DELETE_MEMBER': {
+      const memberIndex = findMemberIndex(action.username);
+      return update(state, {
+        board: {
+          members: { $splice: [[memberIndex, 1]]}
+        }
+      });
+    }
     default: {
       return state;
     }
@@ -633,4 +677,9 @@ export function findBug(card, bugId) {
 
 export function findBugIndex(card, bugId) {
   return card.bugs.findIndex( (bug) => (bug.id === bugId));
+}
+
+export function findMemberIndex(username) {
+  const state = store.getState();
+  return state.board.members.findIndex( (member) => (member.username === username));
 }

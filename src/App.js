@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import BoardPage from './pages/BoardPage';
 import CardPage from './pages/CardPage';
+import MembersPage from './pages/members-page/MembersPage';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
@@ -26,6 +27,7 @@ class App extends Component {
     switch(currentPage) {
       case 'board': return (<BoardPage state={this.props.state}/>);
       case 'card': return (<CardPage columnId={columnId} cardId={cardId}/>);
+      case 'members': return (<MembersPage members={this.props.state.board.members}/>);
       default: console.error("Unknown page: " + currentPage);
     }
   }
