@@ -24,6 +24,7 @@ class BoardPage extends Component {
           <button onClick={this.handleToggleLineSummaryBadges.bind(this)}>Toggle Line Summaries</button>
           <button onClick={this.handleSetCurrentUser.bind(this)}>Set Current User</button>
           <button onClick={this.exportBoard.bind(this)}>Export Board</button>
+          <button onClick={this.handleLoadSampleData.bind(this)}>Load Sample Data</button>
           {/*<button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
         </div>
@@ -122,6 +123,10 @@ class BoardPage extends Component {
     if(username && username.length > 0) {
       State.getReduxStore().dispatch({type: 'SET_CURRENT_USER', username});
     }
+  }
+
+  handleLoadSampleData() {
+      State.getReduxStore().dispatch({type: 'LOAD_SAMPLE_DATA'});
   }
 }
 

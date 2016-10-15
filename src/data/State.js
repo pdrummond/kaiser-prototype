@@ -1,5 +1,6 @@
 import { compose, createStore } from 'redux';
 import persistState from 'redux-localstorage';
+import {sampleState} from './SampleState';
 import update from 'react-addons-update';
 import slug from 'slug';
 import uuid from 'uuid';
@@ -8,17 +9,18 @@ const pathname = window.location.pathname;
 const boardPathName = (pathname.startsWith("/") && pathname.length > 1 ? window.location.pathname : '/default');
 const boardTitle = boardPathName.replace("/", "");
 const boardKey = slug(boardTitle);
-console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardPathName + ")");
+
+console.log("BOARD " + boardTitle + " (key=" + boardKey + ", boardPathName=" + boardPathName + ", pathname=" + pathname + ")");
 
 let defaultState = {
   client: {
-    currentUsername: 'pdrummond',
+    currentUsername: '',
     page: {
       current:'board'
     },
   },
   settings: {
-    currentCardNumber:1,
+    currentCardNumber:0,
     showLineSummaryBadges:false
   },
   board: {
@@ -68,51 +70,7 @@ let defaultState = {
     lineId: 'backlog',
     title: "Triage",
     backgroundColor: '#F76F84',
-    cards:[/*{
-      id:1,
-      title: 'This is a task with todos,bugs and comments',
-      type:'task',
-      todos:[{
-        id:uuid.v1(),
-        title:'Todo 1',
-        done:true
-      },{
-        id:uuid.v1(),
-        title:'Todo 2',
-        done:false
-      }],
-      bugs:[{
-        id:uuid.v1(),
-        title:'Bug 1',
-        done:false
-      }],
-      comments:[{
-          id:1,
-          username: 'pdrummond',
-          text:'This is comment 1',
-          createdAt: new Date(),
-      }, {
-        id:2,
-        username: 'john',
-        text:'This is comment 2',
-        createdAt: new Date(),
-      }],
-      assignees:[{
-        username: 'pdrummond',
-        imageUrl: '/images/pdrummond.png'
-      },{
-        username: 'john',
-        imageUrl: '/images/john_swan.png'
-      }]
-    }, {
-      id:2,
-      title: 'This is a bug',
-      type:'bug',
-      todos:[],
-      bugs:[],
-      comments:[],
-      assignees:[]
-    }*/]
+    cards:[]
   },{
     id: 'backlog/accepted',
     title: "Accepted",
@@ -229,8 +187,9 @@ let defaultState = {
   }]
 };
 
+const initialState = (boardKey === 'default' ? sampleState : defaultState);
 
-function reducer(state = defaultState, action) {
+function reducer(state = initialState, action) {
   //console.log(">> reducer for " + action.type);
   //console.log("-- reducer state", state);
   //console.log("-- reducer action", action);
@@ -241,6 +200,9 @@ function reducer(state = defaultState, action) {
     }
     case 'NEW_BOARD': {
       return defaultState;
+    }
+    case 'LOAD_SAMPLE_DATA': {
+      return sampleState;
     }
     case 'NEW_COMPONENT': {
       const id = slug(action.title);

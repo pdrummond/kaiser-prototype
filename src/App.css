@@ -29,6 +29,7 @@ html, body, #root {
 }
 
 .TopBanner {
+  font-size:12px;
   background-color:#214a6e;
   width:100%;
   padding:10px;
