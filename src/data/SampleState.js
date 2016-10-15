@@ -1,10 +1,8 @@
 export const sampleState = {
   "client": {
-    "currentUsername": "pdrummond",
+    "currentUsername": "jswan",
     "page": {
       "current": "board",
-      "cardId": null,
-      "columnId": "test/testing"
     }
   },
   "settings": {
@@ -30,7 +28,7 @@ export const sampleState = {
       "id": "backlog",
       "title": "Backlog",
       "type": "backlog",
-      "expanded": true,
+      "expanded": false,
       "columnIds": [
         "backlog/incoming",
         "backlog/triage",
@@ -50,13 +48,14 @@ export const sampleState = {
         "dev/paused",
         "dev/blocked",
         "dev/review"
-      ]
+      ],
+      "maximised": false
     },
     {
       "id": "test",
       "title": "Test",
       "type": "test",
-      "expanded": true,
+      "expanded": false,
       "columnIds": [
         "test/ready",
         "test/testing",
@@ -67,7 +66,7 @@ export const sampleState = {
       "id": "done",
       "title": "Done",
       "type": "done",
-      "expanded": true,
+      "expanded": false,
       "columnIds": [
         "done/ready",
         "done/release1-0",
@@ -342,9 +341,8 @@ export const sampleState = {
       "cards": [
         {
           "id": 6,
-          "title": "Turn prototype into real app",
+          "title": "Turn prototype into a real app with an actual server and everything",
           "type": "task",
-          "editMode": false,
           "todos": [],
           "bugs": [],
           "comments": [],
