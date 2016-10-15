@@ -368,7 +368,7 @@ function reducer(state = defaultState, action) {
       const columnIndex = findColumnIndex(action.columnId);
       return update(state, {
         columns: {[columnIndex]: {
-          showNewCardInput: {$set: true}
+          showNewCardInput: {$set: action.show}
         }}
       });
     }

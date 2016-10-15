@@ -53,7 +53,7 @@ class Column extends Component {
               );
           })}
           {!showNewCardInput && <a href="" className="newCardLink" onClick={this.handleNewCardLinkClicked.bind(this)}>New Card...</a>}
-          {showNewCardInput && <input ref="newCardInput" className="newCardInput" placeholder="" onKeyUp={(e) => { if(e.keyCode === 13) {this.handleCardInputEnterPressed()}}} autoFocus={true}/>}
+          {showNewCardInput && <input ref="newCardInput" className="newCardInput" placeholder="" onKeyUp={(e) => { if(e.keyCode === 13) { this.handleCardInputEnterPressed()} else if(e.keyCode == 27) {this.handleCardInputEscPressed()} }} autoFocus={true}/>}
         </div>
 
       </div>
@@ -62,12 +62,16 @@ class Column extends Component {
 
   handleNewCardLinkClicked(e) {
     e.preventDefault();
-    State.getReduxStore().dispatch({type: 'SET_COLUMN_SHOW_NEW_CARD_INPUT', columnId:this.props.column.id});
+    State.getReduxStore().dispatch({type: 'SET_COLUMN_SHOW_NEW_CARD_INPUT', columnId:this.props.column.id, show:true});
   }
 
   handleCardInputEnterPressed() {
     const title = findDOMNode(this.refs.newCardInput).value.trim();
     State.getReduxStore().dispatch({type: 'NEW_CARD', columnId:this.props.column.id, title});
+  }
+
+  handleCardInputEscPressed() {
+    State.getReduxStore().dispatch({type: 'SET_COLUMN_SHOW_NEW_CARD_INPUT', columnId:this.props.column.id, show:false});
   }
 }
 

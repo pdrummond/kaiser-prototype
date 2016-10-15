@@ -25,6 +25,8 @@
   text-decoration: none;
   font-size:14px;
   margin-left:5px;
+  position: absolute;
+    bottom: 30px;
 }
 
 .Column .newCardLink:hover {
