@@ -12,25 +12,19 @@ console.log("BOARD " + boardTitle + " (key=" + boardKey + ", pathname=" + boardP
 
 let defaultState = {
   client: {
+    currentUsername: 'pdrummond',
     page: {
       current:'board'
     },
   },
   settings: {
-    currentCardNumber:2,
-    currentCommentNumber:1,
-    showLineSummaryBadges:true
+    currentCardNumber:1,
+    showLineSummaryBadges:false
   },
   board: {
     id: 'board1',
     title: boardTitle,
-    members: [{
-      username: 'pdrummond',
-      imageUrl: '/images/pdrummond.png'
-    },{
-      username: 'jswan',
-      imageUrl: '/images/john_swan.png'
-    }]
+    members: []
   },
   lines: [{
     id: 'backlog',
@@ -95,13 +89,11 @@ let defaultState = {
       comments:[{
           id:1,
           username: 'pdrummond',
-          userImageUrl: '/images/pdrummond.png',
           text:'This is comment 1',
           createdAt: new Date(),
       }, {
         id:2,
         username: 'john',
-        userImageUrl: '/images/john_swan.png',
         text:'This is comment 2',
         createdAt: new Date(),
       }],
@@ -574,8 +566,7 @@ function reducer(state = defaultState, action) {
           cards: {[cardIndex]: {
             comments: { $push: [{
               id: uuid.v1(),
-              username: 'pdrummond',
-              userImageUrl: '/images/pdrummond.png',
+              username: state.client.currentUsername,
               text: action.text,
               createdAt: new Date(),
             }]}
@@ -649,6 +640,13 @@ function reducer(state = defaultState, action) {
       });
       return newState;
     }
+    case 'SET_CURRENT_USER': {
+      return update(state, {
+        client: {
+          currentUsername: {$set: action.username}
+        }
+      });
+    }
     default: {
       return state;
     }
@@ -669,6 +667,10 @@ const store = createStore(
 
 export function getReduxStore() {
   return store;
+}
+
+export function getState() {
+  return store.getState();
 }
 
 export function findLine(lineId) {

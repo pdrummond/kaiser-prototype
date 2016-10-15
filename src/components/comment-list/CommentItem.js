@@ -11,10 +11,15 @@ class CommentItem extends Component {
     const {
       comment
     } = this.props;
+    let imageUrl = '/images/placeholder.png';
+    const member = State.findMember(comment.username);
+    if(member) {
+      imageUrl = member.imageUrl;
+    }
 
     return (
       <div className="CommentItem">
-        <img src={comment.userImageUrl} alt={comment.username}/>
+        <img src={imageUrl} alt={comment.username}/>
         <div style={{paddingLeft:'50px'}}>
           <b>{comment.username}</b> <span style={{color:'#adadad'}}>{moment(comment.createdAt).fromNow()}</span>
           <div style={{paddingTop:'5px'}}>{comment.text}</div>

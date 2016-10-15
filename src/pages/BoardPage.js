@@ -22,6 +22,7 @@ class BoardPage extends Component {
           <button onClick={this.handleExpandAllLines.bind(this)}>Expand All Lines</button>
           <button onClick={this.handleCollapseAllLines.bind(this)}>Collapse All Lines</button>
           <button onClick={this.handleToggleLineSummaryBadges.bind(this)}>Toggle Line Summaries</button>
+          <button onClick={this.handleSetCurrentUser.bind(this)}>Set Current User</button>
           {/*<button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
@@ -114,6 +115,13 @@ class BoardPage extends Component {
 
   handleCollapseAllLines() {
     State.getReduxStore().dispatch({type: 'COLLAPSE_ALL_LINES'});
+  }
+
+  handleSetCurrentUser() {
+    let username = prompt("Enter username: ", State.getState().client.currentUsername);
+    if(username && username.length > 0) {
+      State.getReduxStore().dispatch({type: 'SET_CURRENT_USER', username});
+    }
   }
 }
 
