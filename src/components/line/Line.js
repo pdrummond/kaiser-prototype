@@ -58,8 +58,7 @@ class Line extends Component {
     );
   }
 
-  renderCollapsedSummary() {
-    console.log("NOOM:", State.getReduxStore().getState());
+  renderCollapsedSummary() {    
     if(State.getReduxStore().getState().settings.showLineSummaryBadges) {
       const lineColumns = this.props.columns.filter( (column) => column.lineId === this.props.line.id);
       return (

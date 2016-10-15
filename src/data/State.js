@@ -473,6 +473,15 @@ function reducer(state = defaultState, action) {
         }
       });
     }
+    case 'DELETE_CARD': {
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: { $splice: [[cardIndex, 1]]}
+        }}
+      });
+    }
     case 'NEW_TODO': {
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
@@ -639,7 +648,7 @@ function reducer(state = defaultState, action) {
         });
       });
       return newState;
-    }    
+    }
     default: {
       return state;
     }

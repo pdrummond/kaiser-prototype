@@ -28,7 +28,7 @@ class CardPage extends Component {
           <h3>Actions</h3>
             <button className="actionButton" onClick={this.handleChangeCardTitle.bind(this)}><i className="fa fa-pencil"/> Change Title</button>
             <button className="actionButton" onClick={this.handleSetAssignee.bind(this)}><i className="fa fa-user"/> Add Assignee</button>
-            <button className="actionButton"><i className="fa fa-times"/> Delete Card</button>
+            <button className="actionButton" onClick={this.handleDeleteCardClicked.bind(this)}><i className="fa fa-times"/> Delete Card</button>
           <h3>Card Type</h3>
           <select ref="cardTypeSelect" className="actionSelect" value={this.card.type} placeholder="Card Type" onChange={this.handleCardTypeChanged.bind(this)}>
             <option value="task">Task</option>
@@ -66,6 +66,13 @@ class CardPage extends Component {
     const cardType = findDOMNode(this.refs.cardTypeSelect).value;
     if(cardType) {
       State.getReduxStore().dispatch({type: 'SET_CARD_TYPE', columnId:this.props.columnId, cardId:this.props.cardId, cardType});
+    }
+  }
+
+  handleDeleteCardClicked() {
+    if(confirm("Are you sure?")) {
+      State.getReduxStore().dispatch({type: 'DELETE_CARD', columnId:this.props.columnId, cardId:this.props.cardId});
+      State.getReduxStore().dispatch({type: 'SHOW_BOARD_PAGE'});
     }
   }
 
