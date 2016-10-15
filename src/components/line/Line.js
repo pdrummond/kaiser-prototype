@@ -24,7 +24,7 @@ class Line extends Component {
     } = this.props;
 
     return (
-      <div className={`Line ${type}`} style={{height: (expanded?(maximised?'800px':'300px'):'30px')}} onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
+      <div className={`Line ${type}`} style={{height: (expanded?(maximised?'800px':'250px'):'30px')}} onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
         <p className="title" onClick={this.handleTitleClicked.bind(this)}>
             <i className={"fa " + (expanded?"fa-caret-down":"fa-caret-right")} style={{width:'12px'}}></i>
             {title} {this.renderLineHeaderInfo()}
