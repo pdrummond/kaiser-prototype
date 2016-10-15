@@ -6,6 +6,7 @@ import * as CardIcon from '../utils/CardIcon';
 import TodoList from '../components/todo-list/TodoList';
 import BugList from '../components/bug-list/BugList';
 import CommentList from '../components/comment-list/CommentList';
+import AssigneesList from '../components/assignees-list/AssigneesList';
 
 class CardPage extends Component {
 
@@ -26,7 +27,7 @@ class CardPage extends Component {
         <div className="rightSidebar">
           <h3>Actions</h3>
             <button className="actionButton" onClick={this.handleChangeCardTitle.bind(this)}><i className="fa fa-pencil"/> Change Title</button>
-            <button className="actionButton" onClick={this.handleSetAssignee.bind(this)}><i className="fa fa-user"/> Set Assignee</button>
+            <button className="actionButton" onClick={this.handleSetAssignee.bind(this)}><i className="fa fa-user"/> Add Assignee</button>
             <button className="actionButton"><i className="fa fa-times"/> Delete Card</button>
           <h3>Card Type</h3>
           <select ref="cardTypeSelect" className="actionSelect" value={this.card.type} placeholder="Card Type" onChange={this.handleCardTypeChanged.bind(this)}>
@@ -34,6 +35,8 @@ class CardPage extends Component {
             <option value="enhancement">Enhancement</option>
             <option value="bug">Bug</option>
           </select>
+          <h3>Assignees</h3>
+          <AssigneesList card={this.card} columnId={this.props.columnId}/>
         </div>
       </div>
     );

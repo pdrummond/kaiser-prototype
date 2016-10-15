@@ -114,9 +114,12 @@ class Card extends Component {
         if(assignees) {
           return (
             <div style={{position:'absolute', bottom:'0px', right:'5px'}}>
-              {assignees.map( (a) => (
-                <img key={a.username} className="card-assignee-image" src={a.imageUrl} alt={"Assigned to " + a.username}/>
-              ))}
+              {assignees.map( (a) => {
+                let member = State.findMember(a.username);
+                return (
+                  <img key={a.username} className="card-assignee-image" src={member.imageUrl} alt={member.username} title={"Assigned to " + member.username}/>
+                );
+              })}
             </div>
           );
         }

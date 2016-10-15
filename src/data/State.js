@@ -333,31 +333,36 @@ function reducer(state = defaultState, action) {
       });
     }
     case 'ADD_CARD_ASSIGNEE': {
-      if(action.assignee === 'pdrummond' || action.assignee === 'john') {
+      if(state.board.members.find( (member) => action.assignee === member.username)) {
         const columnIndex = findColumnIndex(action.columnId);
         const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
-        let assigneeData;
-        if(action.assignee === 'pdrummond') {
-          assigneeData = {
-            username: 'pdrummond',
-            imageUrl: '/images/pdrummond.png'
-          }
-        } else if(action.assignee === 'john') {
-          assigneeData = {
-            username: 'john',
-            imageUrl: '/images/john_swan.png'
-          }
-        }
         return update(state, {
           columns: {[columnIndex]: {
             cards: {[cardIndex]: {
-              assignees: { $push: [assigneeData]}
+              assignees: { $push: [{
+                username: action.assignee
+              }]}
             }}
           }}
         });
       } else {
+        console.warn("No member with name " + action.assignee);
         return state;
       }
+    }
+    case 'DELETE_ASSIGNEE': {
+      console.log("DELETE_ASSIGNEE", action);
+      const columnIndex = findColumnIndex(action.columnId);
+      const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
+      const card = findCard(state.columns[columnIndex], action.cardId);
+      const assigneeIndex = findAssigneeIndex(card, action.assignee);
+      return update(state, {
+        columns: {[columnIndex]: {
+          cards: {[cardIndex]: {
+            assignees: { $splice: [[assigneeIndex, 1]]}
+          }}
+        }}
+      });
     }
     case 'SET_COLUMN_SHOW_NEW_CARD_INPUT': {
       const columnIndex = findColumnIndex(action.columnId);
@@ -677,6 +682,19 @@ export function findBug(card, bugId) {
 
 export function findBugIndex(card, bugId) {
   return card.bugs.findIndex( (bug) => (bug.id === bugId));
+}
+
+export function findAssignee(card, assigneeId) {
+  return card.assignees.find( (assignee) => (assignee.id === assigneeId));
+}
+
+export function findAssigneeIndex(card, assigneeId) {
+  return card.assignees.findIndex( (assignee) => (assignee.id === assigneeId));
+}
+
+export function findMember(username) {
+  const state = store.getState();
+  return state.board.members.find( (member) => (member.username === username));
 }
 
 export function findMemberIndex(username) {
