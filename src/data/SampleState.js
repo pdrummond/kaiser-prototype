@@ -1,8 +1,8 @@
 export const sampleState = {
   "client": {
-    "currentUsername": "jswan",
+    "currentUsername": "pdrummond",
     "page": {
-      "current": "board",
+      "current": "board"
     }
   },
   "settings": {
@@ -28,7 +28,7 @@ export const sampleState = {
       "id": "backlog",
       "title": "Backlog",
       "type": "backlog",
-      "expanded": false,
+      "expanded": true,
       "columnIds": [
         "backlog/incoming",
         "backlog/triage",
@@ -55,7 +55,7 @@ export const sampleState = {
       "id": "test",
       "title": "Test",
       "type": "test",
-      "expanded": false,
+      "expanded": true,
       "columnIds": [
         "test/ready",
         "test/testing",
@@ -66,7 +66,7 @@ export const sampleState = {
       "id": "done",
       "title": "Done",
       "type": "done",
-      "expanded": false,
+      "expanded": true,
       "columnIds": [
         "done/ready",
         "done/release1-0",
@@ -78,7 +78,7 @@ export const sampleState = {
       "id": "scratch",
       "title": "Scratch",
       "type": "scratch",
-      "expanded": false,
+      "expanded": true,
       "columnIds": [
         "scratch/requests",
         "scratch/ideas",
