@@ -23,22 +23,15 @@ class Line extends Component {
       }
     } = this.props;
 
-    let numCards = 0;
-    this.props.columns.forEach((column) => {
-      if(column.lineId === this.props.line.id) {
-        numCards += column.cards.length;
-      }
-    });
-
     return (
       <div className={`Line ${type}`} style={{height: (expanded?(maximised?'800px':'300px'):'30px')}} onMouseEnter={this.onMouseEnter.bind(this)} onMouseLeave={this.onMouseLeave.bind(this)}>
         <p className="title" onClick={this.handleTitleClicked.bind(this)}>
             <i className={"fa " + (expanded?"fa-caret-down":"fa-caret-right")} style={{width:'12px'}}></i>
-            {title} <span style={{color:(numCards > 0 ? 'white':'')}}>({numCards})</span>
+            {title} {this.renderLineHeaderInfo()}
             <span style={{display:(this.state.mouseOver?'inline':'none')}}>
-            {expanded &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-arrows-alt" onClick={this.handleMaximiseClicked.bind(this)}></i>}
-            {type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-pencil" onClick={this.handleEditClicked.bind(this)}></i>}
-            {type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-times" onClick={this.handleDeleteClicked.bind(this)}></i>}
+            {expanded && <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-arrows-alt" onClick={this.handleMaximiseClicked.bind(this)}></i>}
+            {expanded && type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-pencil" onClick={this.handleEditClicked.bind(this)}></i>}
+            {expanded && type === 'component' &&  <i style={{fontSize:'12px', marginLeft:'5px', color:'#87b2da'}} className="fa fa-times" onClick={this.handleDeleteClicked.bind(this)}></i>}
           </span>
         </p>
         <div className="columns" style={{display:(expanded?'flex':'none')}}>
@@ -49,6 +42,34 @@ class Line extends Component {
         </div>
       </div>
     );
+  }
+
+  renderLineHeaderInfo() {
+    let numCards = 0;
+    this.props.columns.forEach((column) => {
+      if(column.lineId === this.props.line.id) {
+        numCards += column.cards.length;
+      }
+    });
+    return (
+      <span className="line-header-info" style={{color:(numCards > 0 ? 'white':'')}}>
+        ({numCards}) {!this.props.line.expanded && this.renderCollapsedSummary()}
+      </span>
+    );
+  }
+
+  renderCollapsedSummary() {
+    console.log("NOOM:", State.getReduxStore().getState());
+    if(State.getReduxStore().getState().settings.showLineSummaryBadges) {
+      const lineColumns = this.props.columns.filter( (column) => column.lineId === this.props.line.id);
+      return (
+        <span className="line-header-summary">
+          {lineColumns.map ((column) =>
+            <span key={column.id} className={"badge " + column.id.split("/")[1] + (column.cards.length>0?' hasCards':'')}><span className="field">{column.title}:</span> <span className="value">{column.cards.length}</span></span>
+          )}
+        </span>
+      );
+    }
   }
 
   handleTitleClicked() {

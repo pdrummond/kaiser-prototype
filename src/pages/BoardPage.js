@@ -16,9 +16,10 @@ class BoardPage extends Component {
     return (
       <div className="BoardPage">
         <div className="buttonMenu">
-          <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>          
+          <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>
           <button onClick={this.newComponent.bind(this)}>New Component</button>
           <button onClick={this.clearBoard.bind(this)}>Clear Board</button>
+          <button onClick={this.handleToggleLineSummaryBadges.bind(this)}>Toggle Line Summary Badges</button>
           {/*<button onClick={this.saveBoard.bind(this)}>Save Board</button>
           <button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
@@ -99,6 +100,10 @@ class BoardPage extends Component {
     if(title && title.length > 0) {
       State.getReduxStore().dispatch({type: 'NEW_COMPONENT', title});
     }
+  }
+
+  handleToggleLineSummaryBadges() {
+    State.getReduxStore().dispatch({type: 'TOGGLE_LINE_SUMMARY_BADGES'});
   }
 }
 

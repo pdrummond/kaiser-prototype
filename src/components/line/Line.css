@@ -1,4 +1,5 @@
 .Line {
+  position:relative;
 }
 
 .Line > .title {
@@ -12,4 +13,40 @@
 .Line .columns {
   display:flex;
   height: calc(100% - 60px);
+}
+
+.Line .line-header-summary {
+  color:#7da8ce;
+  font-size:12px;
+  position:absolute;
+  left:200px;  
+}
+
+.Line .line-header-summary .badge {
+  background-color:#3d678e;
+  border-radius:3px;
+  margin-right:5px;
+  padding:5px;
+  width:150px;
+  display:inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Line .line-header-summary .field {
+  text-transform:uppercase;
+}
+
+.Line .line-header-summary .value {
+  margin-right:5px;
+}
+
+.Line .line-header-summary .badge.hasCards .value {
+  color:white;
+}
+
+.Line .line-header-summary .badge.blocked.hasCards .field {
+  color:#9e0808;
+  font-weight:bold;
 }

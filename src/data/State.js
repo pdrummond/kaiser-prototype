@@ -18,7 +18,8 @@ let defaultState = {
   },
   settings: {
     currentCardNumber:2,
-    currentCommentNumber:1
+    currentCommentNumber:1,
+    showLineSummaryBadges:true
   },
   board: {
     id: 'board1',
@@ -66,7 +67,7 @@ let defaultState = {
     lineId: 'backlog',
     title: "Triage",
     backgroundColor: '#F76F84',
-    cards:[{
+    cards:[/*{
       id:1,
       title: 'This is a task with todos,bugs and comments',
       type:'task',
@@ -112,7 +113,7 @@ let defaultState = {
       bugs:[],
       comments:[],
       assignees:[]
-    }]
+    }*/]
   },{
     id: 'backlog/accepted',
     title: "Accepted",
@@ -559,6 +560,13 @@ function reducer(state = defaultState, action) {
             }]}
           }}
         }}
+      });
+    }
+    case 'TOGGLE_LINE_SUMMARY_BADGES': {
+      return update(state, {
+        settings: {
+          showLineSummaryBadges: {$set: !state.settings.showLineSummaryBadges}
+        }
       });
     }
     default: {
