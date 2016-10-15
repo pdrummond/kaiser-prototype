@@ -22,9 +22,9 @@ class BoardPage extends Component {
           <button onClick={this.handleExpandAllLines.bind(this)}>Expand All Lines</button>
           <button onClick={this.handleCollapseAllLines.bind(this)}>Collapse All Lines</button>
           <button onClick={this.handleToggleLineSummaryBadges.bind(this)}>Toggle Line Summaries</button>
-          <button onClick={this.handleSetCurrentUser.bind(this)}>Set Current User</button>          
-          {/*<button onClick={this.saveBoard.bind(this)}>Save Board</button>
-          <button onClick={this.loadBoard.bind(this)}>Load Board</button>
+          <button onClick={this.handleSetCurrentUser.bind(this)}>Set Current User</button>
+          <button onClick={this.exportBoard.bind(this)}>Export Board</button>
+          {/*<button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
         </div>
         <Board state={this.props.state}/>
@@ -32,7 +32,7 @@ class BoardPage extends Component {
     );
   }
 
-  saveBoard() {
+  exportBoard() {
     const filename = prompt("Enter filename for board", this.state.filename);
     if(filename != null) {
       this.setState({filename});
