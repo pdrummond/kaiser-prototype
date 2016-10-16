@@ -4,5 +4,6 @@
 }
 
 .Board .lines {
-  padding-bottom:50px;  
+  margin-top:10px;
+  padding-bottom:50px;
 }
