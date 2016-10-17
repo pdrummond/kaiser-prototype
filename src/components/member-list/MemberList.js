@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import MemberItem from './MemberItem';
 import * as State from '../../data/State.js';
+import slug from 'slug';
 import './MemberList.css';
 
 class MemberList extends Component {
@@ -26,7 +27,7 @@ class MemberList extends Component {
   handleNewMember() {
     const username = findDOMNode(this.refs.addMemberInput).value.trim();
     if(username && username.length > 0) {
-      State.getReduxStore().dispatch({type: 'NEW_MEMBER', username});
+      State.getReduxStore().dispatch({type: 'NEW_MEMBER', username:slug(username)});
       findDOMNode(this.refs.addMemberInput).value = '';
     }
   }

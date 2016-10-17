@@ -1,8 +1,10 @@
 export const sampleState = {
   "client": {
-    "currentUsername": "pdrummond",
+    "currentUsername": "ksoze",
     "page": {
-      "current": "board"
+      "current": "board",
+      "cardId": null,
+      "columnId": "backlog/incoming"
     }
   },
   "settings": {
@@ -18,8 +20,8 @@ export const sampleState = {
         "imageUrl": "/images/pdrummond.png"
       },
       {
-        "username": "jswan",
-        "imageUrl": "/images/john_swan.png"
+        "username": "ksoze",
+        "imageUrl": "/images/ksoze.png"
       }
     ]
   },
@@ -114,18 +116,28 @@ export const sampleState = {
           "comments": [
             {
               "id": "76c28d40-9305-11e6-87af-c9d5c1334660",
-              "username": "jswan",
+              "username": "ksoze",
               "text": "Is this just a more complicated version of Trello?",
               "createdAt": "2016-10-15T18:30:35.796Z"
             },
             {
               "id": "81e7a3e0-9305-11e6-87af-c9d5c1334660",
-              "username": "jswan",
+              "username": "ksoze",
               "text": "Why is my data only local?  Is this just a demo or something?",
               "createdAt": "2016-10-15T18:30:54.494Z"
+            },
+            {
+              "id": "81dcbb00-9450-11e6-af8e-574534c1acb9",
+              "username": "ksoze",
+              "text": "Who am I?",
+              "createdAt": "2016-10-17T10:00:17.840Z"
             }
           ],
-          "assignees": []
+          "assignees": [
+            {
+              "username": "ksoze"
+            }
+          ]
         }
       ],
       "showNewCardInput": false
@@ -171,7 +183,7 @@ export const sampleState = {
             {
               "id": "ef01b3f0-9303-11e6-87af-c9d5c1334660",
               "username": "",
-              "text": "Not sure about this.  Do you know what's involved @jswan?",
+              "text": "Not sure about this.  Do you know what's involved @ksoze?",
               "createdAt": "2016-10-15T18:19:38.543Z"
             }
           ],
@@ -205,7 +217,7 @@ export const sampleState = {
           "comments": [
             {
               "id": "3a3f3800-9305-11e6-87af-c9d5c1334660",
-              "username": "jswan",
+              "username": "ksoze",
               "text": "Nothing works",
               "createdAt": "2016-10-15T18:28:54.272Z"
             },
@@ -348,7 +360,7 @@ export const sampleState = {
           "comments": [],
           "assignees": [
             {
-              "username": "jswan"
+              "username": "ksoze"
             }
           ]
         }
@@ -380,7 +392,7 @@ export const sampleState = {
               "username": "pdrummond"
             },
             {
-              "username": "jswan"
+              "username": "ksoze"
             }
           ]
         }
@@ -488,20 +500,20 @@ export const sampleState = {
           "comments": [
             {
               "id": "069454d0-9306-11e6-bd86-c195c84b6c4e",
-              "username": "jswan",
+              "username": "ksoze",
               "text": "Okay, I can see the comment box in the card page, but when I press ENTER it doesn't add a comment.  Adding a bug for this.",
               "createdAt": "2016-10-15T18:34:37.085Z"
             },
             {
               "id": "13a62040-9306-11e6-bd86-c195c84b6c4e",
-              "username": "jswan",
+              "username": "ksoze",
               "text": "Going to test this a bit more then I'll pass it back to you @pdrummond to fix the bugs.",
               "createdAt": "2016-10-15T18:34:59.012Z"
             }
           ],
           "assignees": [
             {
-              "username": "jswan"
+              "username": "ksoze"
             }
           ]
         }

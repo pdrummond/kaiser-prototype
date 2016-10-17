@@ -8,7 +8,7 @@ import uuid from 'uuid';
 
 let defaultState = {
   client: {
-    currentUsername: '',
+    currentUsername: 'annonymous',
     page: {
       current:'board'
     },

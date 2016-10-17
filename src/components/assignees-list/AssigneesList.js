@@ -16,7 +16,11 @@ class AssigneesList extends Component {
         <div className="assignees" style={{marginBottom:'10px'}}>
           {assignees.map( (assignee) => {
             let member = State.findMember(assignee.username);
-            return <AssigneeItem key={member.username} member={member} card={this.props.card} columnId={this.props.columnId}/>
+            if(member) {
+              return <AssigneeItem key={member.username} member={member} card={this.props.card} columnId={this.props.columnId}/>
+            } else {
+              return null;
+            }
           })}
         </div>
       </div>

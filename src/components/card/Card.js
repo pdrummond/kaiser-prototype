@@ -36,7 +36,7 @@ class Card extends Component {
     const opacity = isDragging ? 0 : (columnIsActive?0.4:1);
 
     return connectDragSource(connectDropTarget(
-      <div className="Card" style={{opacity, position:'relative'}}>        
+      <div className="Card" style={{opacity, position:'relative'}}>
         {
           editMode
           ?
@@ -116,9 +116,13 @@ class Card extends Component {
             <div style={{position:'absolute', bottom:'0px', right:'5px'}}>
               {assignees.map( (a) => {
                 let member = State.findMember(a.username);
-                return (
-                  <img key={a.username} className="card-assignee-image" src={member.imageUrl} alt={member.username} title={"Assigned to " + member.username}/>
-                );
+                if(member) {
+                  return (
+                    <img key={a.username} className="card-assignee-image" src={member.imageUrl} alt={member.username} title={"Assigned to " + member.username}/>
+                  );
+                } else {
+                  return null;
+                }
               })}
             </div>
           );
