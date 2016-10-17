@@ -1,16 +1,10 @@
-import { compose, createStore } from 'redux';
+import {createStore} from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import persistState from 'redux-localstorage';
 import {sampleState} from './SampleState';
 import update from 'react-addons-update';
 import slug from 'slug';
 import uuid from 'uuid';
-
-const pathname = window.location.pathname;
-const boardPathName = (pathname.startsWith("/") && pathname.length > 1 ? window.location.pathname : '/default');
-const boardTitle = boardPathName.replace("/", "");
-const boardKey = slug(boardTitle);
-
-console.log("BOARD " + boardTitle + " (key=" + boardKey + ", boardPathName=" + boardPathName + ", pathname=" + pathname + ")");
 
 let defaultState = {
   client: {
@@ -25,7 +19,7 @@ let defaultState = {
   },
   board: {
     id: 'board1',
-    title: boardTitle,
+    title: 'Default',
     members: []
   },
   lines: [{
@@ -187,9 +181,7 @@ let defaultState = {
   }]
 };
 
-const initialState = (boardKey === 'default' ? sampleState : defaultState);
-
-function reducer(state = initialState, action) {
+function reducer(state, action) {
   //console.log(">> reducer for " + action.type);
   //console.log("-- reducer state", state);
   //console.log("-- reducer action", action);
@@ -615,17 +607,28 @@ function reducer(state = initialState, action) {
   }
 }
 
-const enhancer = compose(
-  persistState(null, {
-    key: 'kaiser' + boardPathName
-  })
-);
+let enhancer;
+let store;
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  enhancer
-);
+export function createReduxStore(boardKey) {
+  boardKey = boardKey || 'default';
+  boardKey = slug(boardKey);
+  console.log("createReduxStore: " + boardKey);
+  enhancer = composeWithDevTools(
+    persistState(null, {
+      key: 'kaiser/' + boardKey
+    })
+  );
+  const initialState = (boardKey === 'default' ? sampleState : defaultState);
+  initialState.board.title = boardKey;
+
+  store = createStore(
+    reducer,
+    initialState,
+    enhancer
+  );
+  return store;
+}
 
 export function getReduxStore() {
   return store;

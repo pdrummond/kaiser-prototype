@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import App from './App';
+import { Router, Route, browserHistory} from 'react-router'
+import AppContainer from './AppContainer';
 import './index.css';
-import * as State from './data/State';
 
 ReactDOM.render(
-  <Provider store={State.getReduxStore()}>
-      <App />
-  </Provider>,
+    <Router history={browserHistory}>
+      <Route path="/(:boardKey)" component={AppContainer}/>
+    </Router>,
   document.getElementById('root')
 );

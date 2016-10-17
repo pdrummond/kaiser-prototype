@@ -24,7 +24,7 @@ class App extends Component {
           {this.renderCurrentPage()}
         </div>
       </div>
-    );
+  );
   }
 
   renderCurrentPage() {
