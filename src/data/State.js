@@ -297,7 +297,6 @@ function reducer(state, action) {
       }
     }
     case 'DELETE_ASSIGNEE': {
-      console.log("DELETE_ASSIGNEE", action);
       const columnIndex = findColumnIndex(action.columnId);
       const cardIndex = findCardIndex(state.columns[columnIndex], action.cardId);
       const card = findCard(state.columns[columnIndex], action.cardId);
@@ -374,7 +373,6 @@ function reducer(state, action) {
       return newState;
     }
     case 'TOGGLE_LINE_EXPANDED': {
-      console.log("TOGGLE_LINE_EXPANDED", action);
       const lineIndex = findLineIndex(action.lineId);
       return update(state, {
         lines: {[lineIndex]: {
@@ -383,7 +381,6 @@ function reducer(state, action) {
       });
     }
     case 'TOGGLE_LINE_MAXIMISED': {
-      console.log("TOGGLE_LINE_MAXIMISED", action);
       const lineIndex = findLineIndex(action.lineId);
       return update(state, {
         lines: {[lineIndex]: {
@@ -392,7 +389,6 @@ function reducer(state, action) {
       });
     }
     case 'DELETE_LINE': {
-      console.log("DELETE_LINE", action);
       const lineIndex = findLineIndex(action.lineId);
       return update(state, {
         lines: { $splice: [[lineIndex, 1]]}
@@ -613,7 +609,6 @@ let store;
 export function createReduxStore(boardKey) {
   boardKey = boardKey || 'default';
   boardKey = slug(boardKey);
-  console.log("createReduxStore: " + boardKey);
   enhancer = composeWithDevTools(
     persistState(null, {
       key: 'kaiser/' + boardKey
