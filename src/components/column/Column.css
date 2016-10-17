@@ -1,4 +1,5 @@
 .Column {
+  position:relative;
   min-width:250px;
   max-width:250px;
   height:100%;
@@ -54,4 +55,15 @@
 }
 .Column .newCardInput:-moz-placeholder { /* Firefox 18- */
   color: pink;
+}
+
+.Column .drop-overlay-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:99;
+  font-size:120px;
+  position:absolute;
+  color:white;
 }

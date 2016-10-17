@@ -36,7 +36,7 @@ class Card extends Component {
     const opacity = isDragging ? 0 : (columnIsActive?0.4:1);
 
     return connectDragSource(connectDropTarget(
-      <div className="Card" style={{opacity, position:'relative'}}>
+      <div className="Card" style={{opacity, position:'relative'}}>        
         {
           editMode
           ?
