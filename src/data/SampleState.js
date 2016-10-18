@@ -2,9 +2,7 @@ export const sampleState = {
   "client": {
     "currentUsername": "ksoze",
     "page": {
-      "current": "board",
-      "cardId": null,
-      "columnId": "Component-Two/todo"
+      "current": "board"
     }
   },
   "settings": {
@@ -13,7 +11,7 @@ export const sampleState = {
   },
   "board": {
     "id": "board1",
-    "title": "test",
+    "title": "Default",
     "members": [
       {
         "username": "pdrummond",
