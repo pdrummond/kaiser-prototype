@@ -44,13 +44,13 @@ function reducer(state, action) {
     case 'NEW_LINE': {
       const id = slug(action.title);
       let newState = update(state, {
-        lines: { $splice: [[1,0, {
+        lines: { $push: [{
           id,
           title: action.title,
           type: 'component',
           expanded:true,
           columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`, `${id}/test-ready`, `${id}/testing`, `${id}/done`],
-        }]]}
+        }]}
       });
       return update(newState, {
         columns: { $push: [{
