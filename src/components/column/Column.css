@@ -13,6 +13,7 @@
   color:#adadad;
   font-size:14px;
   transition: all 0.1s ease-in-out;
+  cursor:pointer;
 }
 
 .Column .cards {
@@ -66,4 +67,20 @@
   font-size:120px;
   position:absolute;
   color:white;
+}
+
+.CollapsedColumn {
+  width:30px;
+  height:100%;
+  margin-right:10px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.CollapsedColumn .title {
+  float:left;
+  transform: rotate(90deg);
+	transform-origin: 4% 90%;
+  width: 180px;
+  color:#4575a1;
 }

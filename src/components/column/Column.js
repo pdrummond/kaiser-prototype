@@ -26,21 +26,51 @@ const columnTarget = {
 class Column extends Component {
 
   render() {
+
+    const {
+      connectDropTarget,
+      column: {
+        collapsed
+      }
+    } = this.props;
+
+    return connectDropTarget(
+      <div>
+        {collapsed ? this.renderCollapsedColumn() : this.renderColumn()}
+      </div>
+    );
+  }
+
+  renderCollapsedColumn() {
+    const {
+      column: {
+        title,
+        cards
+      }
+    } = this.props;
+    return (
+      <div className="CollapsedColumn">
+        <div className="title" onClick={this.handleColumnTitleClicked.bind(this)}>{title} <span style={{color:'#87B4DD', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
+      </div>
+    )
+  }
+
+  renderColumn() {
     const {
       canDrop, isOver, connectDropTarget,
       columnIndex,
       column: {
         title,
+        collapsed,
         showNewCardInput
       }
     } = this.props;
     const isActive = canDrop && isOver;
     //const backgroundColor = //this.props.column.backgroundColor ? this.props.column.backgroundColor : '#E2E4E6';
-
-    return connectDropTarget(
-      <div className={"Column" + (isActive ? ' active':'')}>
+    return (
+      <div className={this.getClassName()}>
         {isActive && <i className="fa fa-plus drop-overlay-icon"/>}
-        <div className="title">{title} <span style={{color:'#565151', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
+        <div className="title" onClick={this.handleColumnTitleClicked.bind(this)}>{title} <span style={{color:'#565151', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
         <div className="cards">
           {this.props.column.cards.map( (card, index) => {
             return (
@@ -51,14 +81,25 @@ class Column extends Component {
                 card={card}
                 columnIndex={columnIndex}
                 columnId={this.props.column.id}/>
-              );
+            );
           })}
           {!showNewCardInput && <a href="" className="newCardLink" onClick={this.handleNewCardLinkClicked.bind(this)}>New Card...</a>}
           {showNewCardInput && <input ref="newCardInput" className="newCardInput" placeholder="" onKeyUp={(e) => { if(e.keyCode === 13) { this.handleCardInputEnterPressed()} else if(e.keyCode === 27) {this.handleCardInputEscPressed()} }} autoFocus={true}/>}
         </div>
-
       </div>
     );
+  }
+
+  getClassName() {
+    let className  = "Column";
+    if(this.props.column.isActive) {
+       className += ' active';
+    }
+    return className;
+  }
+
+  handleColumnTitleClicked() {
+    State.getReduxStore().dispatch({type: 'TOGGLE_COLUMN_COLLAPSED', columnId:this.props.column.id});
   }
 
   handleNewCardLinkClicked(e) {

@@ -22,163 +22,8 @@ let defaultState = {
     title: 'Default',
     members: []
   },
-  lines: [{
-    id: 'backlog',
-    title: "Backlog",
-    type: 'backlog',
-    expanded: true,
-    columnIds: ['backlog/incoming', 'backlog/triage', 'backlog/accepted', 'backlog/rejected', 'backlog/out-of-scope'],
-  },{
-    id: 'dev',
-    title: "Development",
-    type: 'component',
-    expanded: true,
-    columnIds: ['dev/todo', 'dev/doing', 'dev/paused', 'dev/blocked', 'dev/review'],
-  },{
-    id: 'test',
-    title: "Test",
-    type: 'test',
-    expanded: false,
-    columnIds: ['test/ready', 'test/testing', 'test/paused'],
-  },{
-    id: 'done',
-    title: "Done",
-    type: 'done',
-    expanded: true,
-    columnIds: ['done/ready', 'done/release1-0', 'done/release1-1', 'done/release2-0'],
-  },{
-    id: 'scratch',
-    title: "Scratch",
-    type: 'scratch',
-    expanded: false,
-    columnIds: ['scratch/requests', 'scratch/ideas', 'scratch/notes', 'scratch/trash'],
-  }],
-  columns: [{
-    id: 'backlog/incoming',
-    lineId: 'backlog',
-    title: "Incoming",
-    backgroundColor: '#F98295',
-    cards:[]
-  },{
-    id: 'backlog/triage',
-    lineId: 'backlog',
-    title: "Triage",
-    backgroundColor: '#F76F84',
-    cards:[]
-  },{
-    id: 'backlog/accepted',
-    title: "Accepted",
-    lineId: 'backlog',
-    backgroundColor: '#F36077',
-    cards:[]
-  },{
-    id: 'backlog/rejected',
-    title: "Rejected",
-    lineId: 'backlog',
-    backgroundColor: '#E65068',
-    cards:[]
-  },{
-    id: 'backlog/out-of-scope',
-    lineId: 'backlog',
-    title: "Out of Scope",
-    backgroundColor: '#CB3F55',
-    cards:[]
-  },{
-    id: 'dev/todo',
-    title: "Todo",
-    lineId: 'dev',
-    backgroundColor: '#CB3F55',
-    cards:[]
-  },{
-    id: 'dev/doing',
-    title: "Doing",
-    lineId: 'dev',
-    backgroundColor: '#CB3F55',
-    cards:[]
-  },{
-    id: 'dev/paused',
-    title: "Paused",
-    lineId: 'dev',
-    backgroundColor: '#CB3F55',
-    cards:[]
-  },{
-    id: 'dev/blocked',
-    title: "Blocked",
-    lineId: 'dev',
-    backgroundColor: '#CB3F55',
-    cards:[]
-  },{
-    id: 'dev/review',
-    title: "Review",
-    lineId: 'dev',
-    backgroundColor: '#CB3F55',
-    cards:[]
-  },{
-    id: 'test/ready',
-    title: "Test Ready",
-    lineId: 'test',
-    backgroundColor: '#86E7A0',
-    cards:[]
-  },{
-    id: 'test/testing',
-    title: "Testing",
-    lineId: 'test',
-    backgroundColor: '#64D281',
-    cards:[]
-  },{
-    id: 'test/paused',
-    title: "Paused",
-    lineId: 'test',
-    backgroundColor: '#48BA66',
-    cards:[]
-  },{
-    id: 'done/ready',
-    title: "Release Ready",
-    lineId: 'done',
-    backgroundColor: '#E485D2',
-    cards:[]
-  },{
-    id: 'done/release1-0',
-    title: "Release 1.0",
-    lineId: 'done',
-    backgroundColor: '#CD61B8',
-    cards:[]
-  },{
-    id: 'done/release1-1',
-    title: "Release 1.1",
-    lineId: 'done',
-    backgroundColor: '#B3459E',
-    cards:[]
-  },{
-    id: 'done/release2-0',
-    title: "Release 2.0",
-    lineId: 'done',
-    backgroundColor: '#9c3689',
-    cards:[]
-  },{
-    id: 'scratch/requests',
-    title: "Feature Requests",
-    lineId: 'scratch',
-    backgroundColor: '#FFC7AA',
-    cards:[]
-  },{
-    id: 'scratch/ideas',
-    title: "Ideas",
-    lineId: 'scratch',
-    backgroundColor: '#D48E6A',
-    cards:[]
-  },{
-    id: 'scratch/notes',
-    title: "Notes",
-    lineId: 'scratch',
-    backgroundColor: '#AA5F39',
-    cards:[]
-  },{
-    id: 'scratch/trash',
-    title: "Trash",
-    backgroundColor: '#803915',
-    cards:[]
-  }]
+  lines: [],
+  columns: []
 };
 
 function reducer(state, action) {
@@ -204,7 +49,7 @@ function reducer(state, action) {
           title: action.title,
           type: 'component',
           expanded:true,
-          columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`],
+          columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`, `${id}/test-ready`, `${id}/testing`, `${id}/done`],
         }]]}
       });
       return update(newState, {
@@ -212,25 +57,51 @@ function reducer(state, action) {
           id: `${id}/todo`,
           title: "Todo",
           lineId: `${id}`,
+          type:'todo',
           cards:[]
         },{
           id: `${id}/doing`,
           title: "Doing",
           lineId: `${id}`,
+          type:'doing',
           cards:[]
         },{
           id: `${id}/paused`,
           title: "Paused",
           lineId: `${id}`,
+          type:'paused',
+          collapsed:true,
           cards:[]
         },{
           id: `${id}/blocked`,
           title: "Blocked",
+          type:'blocked',
+          collapsed:true,
           lineId: `${id}`,
           cards:[]
         },{
           id: `${id}/review`,
           title: "Review",
+          type:'review',
+          collapsed:true,
+          lineId: `${id}`,
+          cards:[]
+        },{
+          id: `${id}/test-ready`,
+          title: "Test Ready",
+          type:'test-ready',
+          lineId: `${id}`,
+          cards:[]
+        },{
+          id: `${id}/testing`,
+          title: "Testing",
+          type: 'testing',
+          lineId: `${id}`,
+          cards:[]
+        },{
+          id: `${id}/done`,
+          title: "Done",
+          type:'done',
           lineId: `${id}`,
           cards:[]
         }]}
@@ -314,6 +185,15 @@ function reducer(state, action) {
       return update(state, {
         columns: {[columnIndex]: {
           showNewCardInput: {$set: action.show}
+        }}
+      });
+    }
+
+    case 'TOGGLE_COLUMN_COLLAPSED': {
+      const columnIndex = findColumnIndex(action.columnId);
+      return update(state, {
+        columns: {[columnIndex]: {
+          collapsed: {$set: !state.columns[columnIndex].collapsed}
         }}
       });
     }
