@@ -64,9 +64,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index:99;
-  font-size:120px;
+  font-size:80px;
   position:absolute;
-  color:white;
+  color:#e08908;
 }
 
 .CollapsedColumn {

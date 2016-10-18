@@ -59,14 +59,14 @@ class Column extends Component {
       canDrop, isOver,
       columnIndex,
       column: {
-        title,        
+        title,
         showNewCardInput
       }
     } = this.props;
     const isActive = canDrop && isOver;
     //const backgroundColor = //this.props.column.backgroundColor ? this.props.column.backgroundColor : '#E2E4E6';
     return (
-      <div className={this.getClassName()}>
+      <div className={"Column" + (isActive ? ' active':'')}>
         {isActive && <i className="fa fa-plus drop-overlay-icon"/>}
         <div className="title" onClick={this.handleColumnTitleClicked.bind(this)}>{title} <span style={{color:'#565151', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
         <div className="cards">
@@ -86,14 +86,6 @@ class Column extends Component {
         </div>
       </div>
     );
-  }
-
-  getClassName() {
-    let className  = "Column";
-    if(this.props.column.isActive) {
-       className += ' active';
-    }
-    return className;
   }
 
   handleColumnTitleClicked() {
