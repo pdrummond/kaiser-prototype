@@ -46,19 +46,23 @@ class Line extends Component {
 
   renderLineHeaderInfo() {
     let numCards = 0;
+    let numDoneCards = 0;
     this.props.columns.forEach((column) => {
       if(column.lineId === this.props.line.id) {
         numCards += column.cards.length;
+        if(column.type === 'done') {
+          numDoneCards += column.cards.length;
+        }
       }
     });
     return (
-      <span className="line-header-info" style={{color:(numCards > 0 ? 'white':'')}}>
-        ({numCards}) {!this.props.line.expanded && this.renderCollapsedSummary()}
+      <span className="line-header-info" style={{color:(numCards > 0 && numCards === numDoneCards? '#4CAF50' : (numCards > 0 ? 'white':''))}}>
+        ({`${numDoneCards}/${numCards}`}) {!this.props.line.expanded && this.renderCollapsedSummary()}
       </span>
     );
   }
 
-  renderCollapsedSummary() {    
+  renderCollapsedSummary() {
     if(State.getReduxStore().getState().settings.showLineSummaryBadges) {
       const lineColumns = this.props.columns.filter( (column) => column.lineId === this.props.line.id);
       return (
