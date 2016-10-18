@@ -20,16 +20,16 @@ class CommentList extends Component {
           <CommentItem key={comment.id} card={this.props.card} comment={comment} columnId={this.props.columnId}/>
         ))}
         </div>
-        <input ref="addCommentInput" className="addCommentInput" placeholder="Add Comment..." onKeyUp={(e) => { if(e.keyCode === 13) {this.handleNewComment()} }} autoFocus={true}/>
+        <textarea ref="addCommentTextArea" className="addCommentTextArea" placeholder="Add Comment..." onKeyUp={(e) => { if(e.keyCode === 13) {this.handleNewComment()} }} autoFocus={true}/>
       </div>
     );
   }
 
   handleNewComment() {
-    const text = findDOMNode(this.refs.addCommentInput).value.trim();
+    const text = findDOMNode(this.refs.addCommentTextArea).value.trim();
     if(text && text.length > 0) {
       State.getReduxStore().dispatch({type: 'NEW_COMMENT', columnId:this.props.columnId, cardId:this.props.card.id, text});
-      findDOMNode(this.refs.addCommentInput).value = '';
+      findDOMNode(this.refs.addCommentTextArea).value = '';
     }
   }
 }
