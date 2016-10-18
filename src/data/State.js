@@ -41,7 +41,7 @@ function reducer(state, action) {
     case 'LOAD_SAMPLE_DATA': {
       return sampleState;
     }
-    case 'NEW_COMPONENT': {
+    case 'NEW_LINE': {
       const id = slug(action.title);
       let newState = update(state, {
         lines: { $splice: [[1,0, {

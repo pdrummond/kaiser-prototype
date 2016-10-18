@@ -44,24 +44,22 @@ class Column extends Component {
   renderCollapsedColumn() {
     const {
       column: {
-        title,
-        cards
+        title
       }
     } = this.props;
     return (
       <div className="CollapsedColumn">
-        <div className="title" onClick={this.handleColumnTitleClicked.bind(this)}>{title} <span style={{color:'#87B4DD', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
+        <div className="title" onClick={this.handleColumnTitleClicked.bind(this)}>{title} <span style={{color:'#6f97bb', fontWeight:'normal'}}>({this.props.column.cards.length})</span></div>
       </div>
     )
   }
 
   renderColumn() {
     const {
-      canDrop, isOver, connectDropTarget,
+      canDrop, isOver,
       columnIndex,
       column: {
-        title,
-        collapsed,
+        title,        
         showNewCardInput
       }
     } = this.props;

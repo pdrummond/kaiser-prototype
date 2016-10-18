@@ -17,7 +17,7 @@ class BoardPage extends Component {
       <div className="BoardPage">
         <div className="buttonMenu">
           <span style={{fontSize:'30px', color:'white', fontWeight:'100', position:'relative', top:'5px', marginRight:'20px'}}>{board.title}</span>
-          <button onClick={this.newComponent.bind(this)}>New Component</button>
+          <button onClick={this.handleNewLine.bind(this)}>New Line</button>
           <button onClick={this.clearBoard.bind(this)}>Clear Board</button>
           <button onClick={this.handleExpandAllLines.bind(this)}>Expand All Lines</button>
           <button onClick={this.handleCollapseAllLines.bind(this)}>Collapse All Lines</button>
@@ -99,10 +99,10 @@ class BoardPage extends Component {
     }
   }
 
-  newComponent() {
-    const title = prompt("Enter component name");
+  handleNewLine() {
+    const title = prompt("Enter line name");
     if(title && title.length > 0) {
-      State.getReduxStore().dispatch({type: 'NEW_COMPONENT', title});
+      State.getReduxStore().dispatch({type: 'NEW_LINE', title});
     }
   }
 
