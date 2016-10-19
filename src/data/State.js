@@ -53,7 +53,7 @@ function reducer(state, action) {
           title: action.title,
           type: 'component',
           expanded:true,
-          columnIds: [`${id}/todo`, `${id}/doing`, `${id}/paused`, `${id}/blocked`, `${id}/review`, `${id}/test-ready`, `${id}/testing`, `${id}/done`],
+          columnIds: [`${id}/todo`, `${id}/doing`, `${id}/blocked`, `${id}/review`, `${id}/test-ready`, `${id}/testing`, `${id}/done`],
         }]}
       });
       return update(newState, {
@@ -68,13 +68,6 @@ function reducer(state, action) {
           title: "Doing",
           lineId: `${id}`,
           type:'doing',
-          cards:[]
-        },{
-          id: `${id}/paused`,
-          title: "Paused",
-          lineId: `${id}`,
-          type:'paused',
-          collapsed:true,
           cards:[]
         },{
           id: `${id}/blocked`,

@@ -32,7 +32,6 @@ export const sampleState = {
       "columnIds": [
         "Component-One/todo",
         "Component-One/doing",
-        "Component-One/paused",
         "Component-One/blocked",
         "Component-One/review",
         "Component-One/test-ready",
@@ -48,7 +47,6 @@ export const sampleState = {
       "columnIds": [
         "Component-Three/todo",
         "Component-Three/doing",
-        "Component-Three/paused",
         "Component-Three/blocked",
         "Component-Three/review",
         "Component-Three/test-ready",
@@ -64,7 +62,6 @@ export const sampleState = {
       "columnIds": [
         "Component-Two/todo",
         "Component-Two/doing",
-        "Component-Two/paused",
         "Component-Two/blocked",
         "Component-Two/review",
         "Component-Two/test-ready",
@@ -147,14 +144,6 @@ export const sampleState = {
       ],
       "collapsed": true,
       "showNewCardInput": false
-    },
-    {
-      "id": "Component-One/paused",
-      "title": "Paused",
-      "lineId": "Component-One",
-      "type": "paused",
-      "collapsed": true,
-      "cards": []
     },
     {
       "id": "Component-One/blocked",
@@ -245,14 +234,6 @@ export const sampleState = {
       "type": "doing",
       "cards": [],
       "collapsed": true
-    },
-    {
-      "id": "Component-Two/paused",
-      "title": "Paused",
-      "lineId": "Component-Two",
-      "type": "paused",
-      "collapsed": true,
-      "cards": []
     },
     {
       "id": "Component-Two/blocked",
@@ -393,14 +374,6 @@ export const sampleState = {
         }
       ],
       "showNewCardInput": false
-    },
-    {
-      "id": "Component-Three/paused",
-      "title": "Paused",
-      "lineId": "Component-Three",
-      "type": "paused",
-      "collapsed": true,
-      "cards": []
     },
     {
       "id": "Component-Three/blocked",
