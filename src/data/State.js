@@ -2,6 +2,7 @@ import {createStore} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import persistState from 'redux-localstorage';
 import {sampleState} from './SampleState';
+import {testState} from './TestState';
 import update from 'react-addons-update';
 import slug from 'slug';
 import uuid from 'uuid';
@@ -40,6 +41,9 @@ function reducer(state, action) {
     }
     case 'LOAD_SAMPLE_DATA': {
       return sampleState;
+    }
+    case 'LOAD_TEST_DATA': {
+      return testState;
     }
     case 'NEW_LINE': {
       const id = slug(action.title);

@@ -156,7 +156,7 @@ class Card extends Component {
           columnId: props.columnId,
           todos:props.card.todos,
           bugs:props.card.bugs,
-          comments:props.card.comments,
+          comments:[],//props.card.comments,
           assignees:props.card.assignees
         };
       }

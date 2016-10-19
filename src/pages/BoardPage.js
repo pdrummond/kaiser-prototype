@@ -25,6 +25,7 @@ class BoardPage extends Component {
           <button onClick={this.handleSetCurrentUser.bind(this)}>Set Current User</button>
           <button onClick={this.exportBoard.bind(this)}>Export Board</button>
           <button onClick={this.handleLoadSampleData.bind(this)}>Load Sample Data</button>
+          {/*<button onClick={this.handleLoadTestData.bind(this)}>Load Test Data</button>*/}
           {/*<button onClick={this.loadBoard.bind(this)}>Load Board</button>
           <input ref="fileInput" type='file'/>*/}
         </div>
@@ -126,7 +127,11 @@ class BoardPage extends Component {
   }
 
   handleLoadSampleData() {
-      State.getReduxStore().dispatch({type: 'LOAD_SAMPLE_DATA'});
+    State.getReduxStore().dispatch({type: 'LOAD_SAMPLE_DATA'});
+  }
+
+  handleLoadTestData() {
+    State.getReduxStore().dispatch({type: 'LOAD_TEST_DATA'});
   }
 }
 
